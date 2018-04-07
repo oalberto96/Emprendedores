@@ -1,15 +1,26 @@
 var app = angular.module('starter.controllers', ['ngCookies']);
 
-app.controller('LoginCtrl', function($scope, $location, LoginService, $cookies) {
+app.controller('LoginCtrl', function($scope, $location, $ionicHistory , LoginService, $cookies) {
     $scope.data = {};
 
-    $scope.go = function ( path ) {
-		console.log(path)
-	  $location.path( path );
+    $scope.go = function ( path , disableHistory) {
+	  	if (disableHistory) {
+	  		$ionicHistory.nextViewOptions({
+			    disableBack: true
+			});
+	  	}
+	  	$location.path( path );
 	};
 
 	$scope.login = function() {
-    	LoginService.loginUser($scope.data.username, $scope.data.password);
+		var response = LoginService.loginUser(
+			$scope.data.username,
+			$scope.data.password).success(function(result){
+				console.log(result);
+				$scope.go('home',true);
+			}).error(function(result){
+				$scope.error = "Correo o contrasena no validos";
+			})
     };
 
 });
@@ -37,4 +48,10 @@ app.controller('RegisterCtrl', function($scope, LoginService){
 			)
 		}
 	}
+});
+
+app.controller('HomeCtrl', function($scope) {
+	$scope.isAuthenticated = function() {
+    	LoginService.isAuthenticated();
+    };
 });
