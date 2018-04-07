@@ -4,12 +4,13 @@
   "type": "ionic1",
   "proxies": [
     {
-      "path": "/api/login",
+      "path": "/api/account/login",
       "proxyUrl": "http://localhost:8000/api/account/login/"
     }
   ],
   "integrations": {
-    "gulp": {}
+    "gulp": {},
+    "cordova": {}
   },
   "watchPatterns": [
     "scss/**/*",

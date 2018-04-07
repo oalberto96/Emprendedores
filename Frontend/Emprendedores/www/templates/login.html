@@ -1,0 +1,23 @@
+<ion-view title="Emprendedores" ng-controller="LoginCtrl">
+  <ion-content class="padding">
+    <div class="row responsive-sm">
+      <div class="col-33 col-offset-33">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="Username" ng-model="data.username">
+          </label>
+          <label class="item item-input">
+            <input type="password" placeholder="Password" ng-model="data.password">
+          </label>
+        </div>
+        <button class="button button-block button-positive" ng-click="login()">Iniciar Sesion</button>
+        <button class="col-offset-33 button button-clear button-positive">
+          ¿Olvidaste tu contraseña?
+        </button>
+        <button class="button button-block button-positive" ng-click="go('/register')">
+          Crear una cuenta nueva
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

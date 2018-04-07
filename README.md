@@ -25,3 +25,34 @@ Instalar django-rest framework
 ```console
 pip install djangorestframework
 ```
+
+### Ionic
+
+#### Build para android
+
+```console
+sudo apt-get install openjdk-8-jdk openjdk-8-jre
+```
+
+Instalar android studio
+
+Agregar variables de entorno en '~/.bashrc'
+```console
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=${PATH}:~/Android/Sdk/tools
+export PATH=${PATH}:~/Android/Sdk/platform-tools
+```
+Actualizar ~/.bashrc
+```console
+source ~/.bashrc
+```
+
+Instalar gradle
+```console
+sudo apt-get install gradle
+```
+
+Compilar
+```
+ionic cordova build android
+```

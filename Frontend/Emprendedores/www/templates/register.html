@@ -1,0 +1,27 @@
+<ion-view title="Emprendedores" ng-controller="RegisterCtrl">
+  <ion-content class="padding">
+    <div class="row responsive-sm">
+      <div class="col-33 col-offset-33">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="Nombre" ng-model="data.nombre">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Apellidos" ng-model="data.apellido">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Correo electronico" ng-model="data.correo">
+          </label>
+          <label class="item item-input">
+            <input type="password" placeholder="Contrasena" ng-model="data.contrasena">
+          </label>
+          <label class="item item-input">
+            <input type="password" placeholder="Confirmar Contrasena" ng-model="data.confirmarContrasena">
+          </label>
+        </div>
+        <button class="button button-block button-positive" ng-click="register()">Registrarse
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

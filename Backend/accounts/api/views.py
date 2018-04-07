@@ -6,12 +6,13 @@ from rest_framework import permissions
 from rest_framework.response import Response
 
 from accounts.api.serializers import UserSerializer
+from django.views.decorators.csrf import csrf_exempt
 
 
 class UserAPILogin(APIView):
 	permission_classes = [permissions.AllowAny]
 	serializer_class = UserSerializer
-
+	
 	def post(self, serializer):
 		username = serializer.data['username']
 		password = serializer.data['password']
