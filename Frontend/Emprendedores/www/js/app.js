@@ -5,9 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('starter', ['ionic','starter.controllers', 'starter.services', 'ngCookies']);
 
+app.run.$inject = ['$http']
 
-app.run(function($ionicPlatform) {
-  //$http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
+app.run(function($ionicPlatform, $http) {
+  $http.defaults.xsrfHeaderName = 'X-CSRFToken';
+  $http.defaults.xsrfCookieName = 'csrftoken';
 
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {

@@ -3,15 +3,12 @@ var app = angular.module('starter.services', ['ngCookies']);
 app.service('LoginService', function($http, $cookies) {
     this.loginUser = function (username, password) {
     	return $http({
-    	  headers: {
-    	  	'X-CSRFToken': $cookies.get('csrftoken')
-    	  },
 		  method: 'POST',
 		  data: {
 		  	"username": username,
 		  	"password": password
 		  },
-		  url: '/api/account/login'
+		  url: 'http://localhost:8000/api/account/login/'
 		});
     }
 

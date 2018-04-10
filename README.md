@@ -21,9 +21,10 @@ pip install django==1.11
 ```
 
 
-Instalar django-rest framework
+Instalar dependencias
 ```console
 pip install djangorestframework
+pip install django-cors-headers
 ```
 
 ### Ionic

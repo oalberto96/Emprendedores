@@ -14,8 +14,8 @@ class UserAPILogin(APIView):
 	serializer_class = UserSerializer
 	
 	def post(self, serializer):
-		username = serializer.data['username']
-		password = serializer.data['password']
+		username = serializer.data.get('username')
+		password = serializer.data.get('password')
 		user = authenticate(self,username=username,password=password)
 		if user is not None:
 			login(serializer, user)

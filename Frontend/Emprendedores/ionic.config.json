@@ -2,12 +2,6 @@
   "name": "Emprendedores",
   "app_id": "",
   "type": "ionic1",
-  "proxies": [
-    {
-      "path": "/api/account/login",
-      "proxyUrl": "http://localhost:8000/api/account/login/"
-    }
-  ],
   "integrations": {
     "gulp": {},
     "cordova": {}
