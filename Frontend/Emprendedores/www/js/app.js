@@ -30,25 +30,34 @@ app.run(function($ionicPlatform, $http) {
 
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('login', {
-      url: "/login",
-      templateUrl: "templates/login.html",
-      controller: 'LoginCtrl'
-    })
-
-  .state('register', {
-    url: "/register",
-    templateUrl: "templates/register.html",
-    controller: 'RegisterCtrl'
-  })
 
   .state('home', {
-    url: "/",
+    url: "/home",
+    abstract: true,
     templateUrl: "templates/home.html",
-    controller: 'HomeCtrl'
+  })
+
+  .state('home.client', {
+    url: '/clients',
+    views: {
+      'clients': {
+        templateUrl: 'templates/clients.html',
+        controller: 'ClientCtrl'
+      }
+    }
+  })
+
+  .state('home.product', {
+    url: '/products',
+    views: {
+      'products': {
+        templateUrl: 'templates/products.html',
+        controller: 'ProductCtrl'
+      }
+    }
   });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/home/clients');
 
 })
 

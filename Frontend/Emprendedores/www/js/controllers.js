@@ -15,8 +15,8 @@ app.controller('LoginCtrl', function($scope, $location, $ionicHistory , LoginSer
 	$scope.login = function() {
 		var response = LoginService.loginUser(
 			$scope.data.username,
-			$scope.data.password).success(function(result){
-				console.log(result);
+			$scope.data.password)
+			.success(function(result){
 				$scope.go('home',true);
 			}).error(function(result){
 				$scope.error = "Correo o contrasena no validos";
@@ -54,4 +54,12 @@ app.controller('HomeCtrl', function($scope) {
 	$scope.isAuthenticated = function() {
     	LoginService.isAuthenticated();
     };
+});
+
+app.controller('ProductCtrl',function($scope){
+
+});
+
+app.controller('ClientCtrl',function($scope){
+	
 });
