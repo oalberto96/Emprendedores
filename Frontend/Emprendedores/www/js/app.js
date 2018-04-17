@@ -1,11 +1,5 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', ['ionic','starter.controllers', 'starter.services', 'ngCookies']);
-
-app.run.$inject = ['$http']
+(function() {
+var app = angular.module('emprendedores', ['ionic']);
 
 app.run(function($ionicPlatform, $http) {
   $http.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -55,10 +49,24 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'ProductCtrl'
       }
     }
-  });
+  })
+
+  $stateProvider
+  .state('login', {
+    url: "/login",
+    templateUrl: "templates/account/login.html",
+    controller: 'LoginCtrl'
+  })
+
+  .state('register', {
+    url: "/register",
+    templateUrl: "templates/account/register.html",
+    controller: 'RegisterCtrl'
+  })
 
   $urlRouterProvider.otherwise('/home/clients');
 
 })
 
+})();
 

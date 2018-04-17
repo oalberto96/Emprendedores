@@ -1,6 +1,12 @@
+(function() {
+"use-strict";
+
 var app = angular.module('emprendedores');
 
-app.controller('LoginCtrl', function($scope, $location, $ionicHistory , LoginService) {
+app.controller('LoginCtrl',LoginCtrl);
+
+LoginCtrl.$inject = ['$scope','$location','$ionicHistory', 'LoginService'];
+function LoginCtrl($scope, $location, $ionicHistory , LoginService) {
     $scope.data = {};
 
     $scope.go = function ( path , disableHistory) {
@@ -16,14 +22,13 @@ app.controller('LoginCtrl', function($scope, $location, $ionicHistory , LoginSer
 		var response = LoginService.loginUser(
 			$scope.data.username,
 			$scope.data.password)
-			.success(function(result){
-				$scope.go('home',true);
-			}).error(function(result){
-				$scope.error = "Correo o contrasena no validos";
-			})
+		.success(function(result){
+			$scope.go('home',true);
+		}).error(function(result){
+			$scope.error = "Correo o contrasena no validos";
+		})
     };
-
-});
+}
 
 function validateEmail(email){
     var regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -34,7 +39,10 @@ function validatePassword(password, passwordConfirm){
 	return password == passwordConfirm;
 }
 
-app.controller('RegisterCtrl', function($scope, LoginService){
+app.controller('RegisterCtrl', RegisterCtrl);
+RegisterCtrl.$inject = ['$scope', 'LoginService'];
+
+function RegisterCtrl($scope, LoginService){
 	$scope.data = {};
 
 	$scope.register = function () {
@@ -48,13 +56,8 @@ app.controller('RegisterCtrl', function($scope, LoginService){
 			)
 		}
 	}
-});
+}
 
-app.controller('HomeCtrl', function($scope) {
-	$scope.isAuthenticated = function() {
-    	LoginService.isAuthenticated();
-    };
-});
 
 app.controller('ProductCtrl',function($scope){
 
@@ -63,3 +66,7 @@ app.controller('ProductCtrl',function($scope){
 app.controller('ClientCtrl',function($scope){
 	
 });
+
+
+})();
+
