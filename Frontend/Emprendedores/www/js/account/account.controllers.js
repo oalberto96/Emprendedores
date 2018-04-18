@@ -27,7 +27,7 @@ function LoginCtrl($scope, $location, $ionicHistory , LoginService) {
 		}).error(function(result){
 			$scope.error = "Correo o contrasena no validos";
 		})
-    };
+    }
 }
 
 function validateEmail(email){
@@ -54,6 +54,9 @@ function RegisterCtrl($scope, LoginService){
 			$scope.data.correo,
 			$scope.data.contrasena,
 			)
+			.success(function(result){
+				console.log(result);
+			})
 		}
 	}
 }

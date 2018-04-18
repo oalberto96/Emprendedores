@@ -1,4 +1,6 @@
 (function() {
+"use-strict";
+
 var app = angular.module('emprendedores');
 
 app.service('LoginService', LoginService);
@@ -17,8 +19,17 @@ function LoginService($http) {
     }
 
 	this.registerUser = function (nombre, apellidos, correo, contrasena){
-		alert("Usuario registrado");
+		return $http({
+		  method: 'POST',
+		  data: {
+		  	"username": correo,
+		  	"first_name": nombre,
+		  	"last_name": apellidos,
+		  	"email": correo,
+		  	"password": contrasena
+		  },
+		  url: 'http://10.0.0.4:8000/api/account/register/'
+		});
 	}
 }
-
 })();
