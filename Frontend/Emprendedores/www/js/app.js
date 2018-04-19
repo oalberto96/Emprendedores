@@ -1,9 +1,10 @@
 (function() {
-var app = angular.module('emprendedores', ['ionic']);
+var app = angular.module('emprendedores', ['ionic','ngCookies']);
 
-app.run(function($ionicPlatform, $http) {
+app.run(function($ionicPlatform, $http, $cookies) {
   $http.defaults.xsrfHeaderName = 'X-CSRFToken';
   $http.defaults.xsrfCookieName = 'csrftoken';
+  $http.defaults.headers.common.Authorization = $cookies.get('sessionid');
 
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -35,7 +36,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     url: '/clients',
     views: {
       'clients': {
-        templateUrl: 'templates/clients.html',
+        templateUrl: 'templates/client/clients.html',
         controller: 'ClientCtrl'
       }
     }

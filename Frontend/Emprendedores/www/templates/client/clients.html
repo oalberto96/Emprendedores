@@ -1,0 +1,19 @@
+<ion-view view-title="clients">
+	<ion-content class="padding">
+		<div class="list list-inset">
+			<label class="item item-input">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input type="text" placeholder="Search">
+			</label>
+		</div>
+		<div ng-controller="ClientListController as ctrl">
+			<div class="list" ng-repeat="client in ctrl.clients">
+				<a class="item item-avatar" href="#">
+					<img src="venkman.jpg">
+					<h2 ng-bind="client.first_name + ' ' client.last_name" ></h2>
+					<p ng-bind="client.phoneNumber"></p>
+				</a>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

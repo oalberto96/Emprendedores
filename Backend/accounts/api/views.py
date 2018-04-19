@@ -1,12 +1,14 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt
+from django.middleware.csrf import get_token
 
+from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
 
 from accounts.api.serializers import LoginUserSerializer, RegisterUserSerializer
-from django.views.decorators.csrf import csrf_exempt
 
 
 class LoginUserAPI(APIView):
@@ -18,8 +20,10 @@ class LoginUserAPI(APIView):
 		password = request.data.get('password')
 		user = authenticate(self,username=username,password=password)
 		if user is not None:
+			csrf_token = get_token(request)
 			login(request, user)
-			response = Response(status=status.HTTP_202_ACCEPTED)
+			token, created  = Token.objects.get_or_create(user=user)
+			response = Response({'token': token.key,'csrftoken': csrf_token})
 		else:
 			response = Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 		return response

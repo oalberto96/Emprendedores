@@ -5,8 +5,8 @@ var app = angular.module('emprendedores');
 
 app.service('LoginService', LoginService);
 
-LoginService.$inject = ['$http'];
-function LoginService($http) {
+LoginService.$inject = ['$http','$cookies','REST_SERVER'];
+function LoginService($http, $cookies, REST_SERVER) {
     this.loginUser = function (username, password) {
     	return $http({
 		  method: 'POST',
@@ -14,7 +14,12 @@ function LoginService($http) {
 		  	"username": username,
 		  	"password": password
 		  },
-		  url: 'http://10.0.0.4:8000/api/account/login/'
+		  url: REST_SERVER + '/api/account/login/'
+		}).success(function(data, status, headers, config){
+			console.log(data)
+			token = String('Token ') + data['token'];
+			$cookies.put('csrftoken', data['csrftoken'])
+			$cookies.put('sessionid', token );
 		});
     }
 
@@ -28,7 +33,7 @@ function LoginService($http) {
 		  	"email": correo,
 		  	"password": contrasena
 		  },
-		  url: 'http://10.0.0.4:8000/api/account/register/'
+		  url: REST_SERVER + '/api/account/register/'
 		});
 	}
 }
