@@ -65,7 +65,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     controller: 'RegisterCtrl'
   })
 
-  $urlRouterProvider.otherwise('/home/clients');
+  $urlRouterProvider.otherwise('/login');
 
 })
 

@@ -19,7 +19,9 @@ function ClientService($http, REST_SERVER) {
 			url: REST_SERVER + '/api/client/list/'
 		})
 		.success(function(result){
-			console.log(result)
+			console.log(result.data)
+			clients.push(result.data)
+			console.log(clients)
 		});
 	}
 }

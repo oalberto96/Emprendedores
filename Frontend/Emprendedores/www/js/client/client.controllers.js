@@ -9,7 +9,7 @@ ClientListController.$inject = ['$scope','ClientService'];
 function ClientListController($scope, ClientService){
 	clientList = this;
 	ClientService.retrieveClients();
-	clients = ClientService.getClients();
+	this.clients = ClientService.getClients();
 }
 
 })();

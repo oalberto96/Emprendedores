@@ -39,15 +39,29 @@ function validatePassword(password, passwordConfirm){
 	return password == passwordConfirm;
 }
 
-app.controller('RegisterCtrl', RegisterCtrl);
-RegisterCtrl.$inject = ['$scope', 'LoginService'];
 
-function RegisterCtrl($scope, LoginService){
+app.controller('RegisterCtrl', RegisterCtrl);
+RegisterCtrl.$inject = ['$scope', '$location', '$ionicHistory' , 'LoginService'];
+
+function RegisterCtrl($scope,$location, $ionicHistory, LoginService){
 	$scope.data = {};
 
+	$scope.go = function ( path , disableHistory) {
+	  	if (disableHistory) {
+	  		$ionicHistory.nextViewOptions({
+			    disableBack: true
+			});
+	  	}
+	  	$location.path( path );
+	};
+
 	$scope.register = function () {
-		if (validateEmail($scope.data.correo) && 
-			validatePassword($scope.data.contrasena, $scope.data.confirmarContrasena)) {
+		var error = false;
+		if (!validatePassword($scope.data.contrasena, $scope.data.confirmarContrasena)) {
+			$scope.passMessage = "No coindicen las contrasenas"
+			error = true;
+		}
+		if (!error) {
 			LoginService.registerUser(
 			$scope.data.nombre, 
 			$scope.data.apellido,
@@ -55,7 +69,7 @@ function RegisterCtrl($scope, LoginService){
 			$scope.data.contrasena,
 			)
 			.success(function(result){
-				console.log(result);
+				$scope.go('home',true);
 			})
 		}
 	}

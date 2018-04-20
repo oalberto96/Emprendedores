@@ -36,7 +36,8 @@ class RegisterUserAPI(APIView):
 		serializer = RegisterUserSerializer(data=request.data)
 		if(serializer.is_valid()):
 			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
+			logUser = LoginUserAPI()
+			return logUser.post(request)
 		else:
 			return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 		
