@@ -16,7 +16,6 @@ function LoginService($http, $cookies, REST_SERVER) {
 		  },
 		  url: REST_SERVER + '/api/account/login/'
 		}).success(function(data, status, headers, config){
-			console.log(data)
 			token = String('Token ') + data['token'];
 			$cookies.put('csrftoken', data['csrftoken'])
 			$cookies.put('sessionid', token );

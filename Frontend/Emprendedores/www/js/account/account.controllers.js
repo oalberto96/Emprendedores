@@ -5,25 +5,20 @@ var app = angular.module('emprendedores');
 
 app.controller('LoginCtrl',LoginCtrl);
 
-LoginCtrl.$inject = ['$scope','$location','$ionicHistory', 'LoginService'];
-function LoginCtrl($scope, $location, $ionicHistory , LoginService) {
+LoginCtrl.$inject = ['$scope','$state', 'LoginService'];
+function LoginCtrl($scope, $state, LoginService) {
     $scope.data = {};
 
-    $scope.go = function ( path , disableHistory) {
-	  	if (disableHistory) {
-	  		$ionicHistory.nextViewOptions({
-			    disableBack: true
-			});
-	  	}
-	  	$location.path( path );
-	};
+    $scope.go = function(path){
+		$state.go(path)
+	}
 
 	$scope.login = function() {
 		var response = LoginService.loginUser(
 			$scope.data.username,
 			$scope.data.password)
 		.success(function(result){
-			$scope.go('home',true);
+			$state.go("home.client");
 		}).error(function(result){
 			$scope.error = "Correo o contrasena no validos";
 		})
@@ -41,19 +36,14 @@ function validatePassword(password, passwordConfirm){
 
 
 app.controller('RegisterCtrl', RegisterCtrl);
-RegisterCtrl.$inject = ['$scope', '$location', '$ionicHistory' , 'LoginService'];
+RegisterCtrl.$inject = ['$scope', '$state', 'LoginService'];
 
-function RegisterCtrl($scope,$location, $ionicHistory, LoginService){
+function RegisterCtrl($scope, $state , LoginService){
 	$scope.data = {};
 
-	$scope.go = function ( path , disableHistory) {
-	  	if (disableHistory) {
-	  		$ionicHistory.nextViewOptions({
-			    disableBack: true
-			});
-	  	}
-	  	$location.path( path );
-	};
+	$scope.go = function(path){
+		$state.go(path)
+	}
 
 	$scope.register = function () {
 		var error = false;
@@ -69,7 +59,7 @@ function RegisterCtrl($scope,$location, $ionicHistory, LoginService){
 			$scope.data.contrasena,
 			)
 			.success(function(result){
-				$scope.go('home',true);
+				$state.go("home.client");
 			})
 		}
 	}
