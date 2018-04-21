@@ -16,12 +16,12 @@ function ClientService($http, REST_SERVER) {
 	this.retrieveClients = function(){
 		$http({
 			method: 'GET',
-			url: REST_SERVER + '/api/client/list/'
+			url: REST_SERVER + '/api/clients/'
 		})
 		.success(function(result){
-			console.log(result.data)
-			clients.push(result.data)
-			console.log(clients)
+			for (var i = 0; i < result.length; i++) {
+				clients.push(result[i])
+			}
 		});
 	}
 }

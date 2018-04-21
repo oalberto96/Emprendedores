@@ -8,10 +8,10 @@
 		</div>
 		<div ng-controller="ClientListController as ctrl">
 			<div class="list" ng-repeat="client in ctrl.clients">
-				<a class="item item-avatar" href="#">
-					<img src="venkman.jpg">
-					<h2 ng-bind="client.first_name + ' ' client.last_name" ></h2>
-					<p ng-bind="client.phoneNumber"></p>
+				<a class="item item-avatar">
+					<!-- <img src="venkman.jpg"> -->
+					<h2 ng-bind="client.first_name + ' ' + client.last_name" ></h2>
+					<p ng-bind="client.address"></p>
 				</a>
 			</div>
 		</div>

@@ -5,5 +5,5 @@ from sales.api.views import ClientViewSet
 
 
 urlpatterns = [
-	url(r'^list/$',ClientViewSet.as_view({'get':'list'}), name='client-list'),
+	url(r'^$',ClientViewSet.as_view({'get':'list'}), name='client-list'),
 ]
