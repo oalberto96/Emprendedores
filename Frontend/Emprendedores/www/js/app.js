@@ -42,6 +42,18 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     }
   })
 
+  .state('home.addClient', {
+    url: '/clients',
+    views: {
+      'clients': {
+        templateUrl: 'templates/client/add-client.html',
+        controller: 'ClientCtrl'
+      }
+    }
+  })
+
+
+
   .state('home.product', {
     url: '/products',
     views: {
@@ -52,7 +64,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     }
   })
 
-  $stateProvider
+  
+
   .state('login', {
     url: "/login",
     templateUrl: "templates/account/login.html",

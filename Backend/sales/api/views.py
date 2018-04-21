@@ -13,6 +13,14 @@ class ClientViewSet(viewsets.ViewSet):
 	permission_classes = [permissions.IsAuthenticated]
 	serializer_class = ClientSerializer
 
+	def create(self, request):
+		request.data['id_user'] = str(request.user.id)
+		print(request.data)
+		serializer = ClientSerializer(data=request.data)
+		serializer.is_valid()
+		serializer.save()
+		return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 	def list(self, request):
 		'''
 		Listar todos los clientes que el usuario creo
