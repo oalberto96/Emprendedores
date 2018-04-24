@@ -38,4 +38,25 @@ function ClientAddCtrl($scope,$ionicHistory, $state ,ClientService){
 		});
 	}
 }
+
+app.controller('ClientGetCtrl', ClientGetCtrl);
+ClientGetCtrl.$inject = ['$scope', '$stateParams','$state','ClientService'];
+
+function ClientGetCtrl($scope, $stateParams, $state ,ClientService){
+	ctrl = this;
+	this.retrieveClient = function () {
+
+		ClientService.retrieveClient($stateParams.clientId)
+		.success(function(result){
+			ctrl.first_name = result.first_name;
+			ctrl.last_name = result.last_name;
+			ctrl.email = result.email;
+			ctrl.phone_number = result.phone_number;
+			ctrl.address = result.address;
+			ctrl.rfc = result.rfc;
+			ctrl.notes = result.notes;
+		});
+	}
+	this.retrieveClient();
+}
 })();

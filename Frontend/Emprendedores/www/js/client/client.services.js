@@ -25,6 +25,14 @@
 			});
 		}
 
+		this.retrieveClient = function(clientId){
+			console.log(REST_SERVER + 'api/sale/clients/' + clientId.toString());
+			return $http({
+				method: 'GET',
+				url: REST_SERVER + '/api/sale/clients/' + clientId.toString()
+			});
+		}
+
 		this.addClient = function (first_name,last_name,email,phone_number,address,rfc,notes){
 			return $http({
 				method: 'POST',

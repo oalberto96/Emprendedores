@@ -14,16 +14,26 @@ class ClientViewSet(viewsets.ViewSet):
 	serializer_class = ClientSerializer
 
 	def create(self, request):
-		request.data['id_user'] = str(request.user.id) #TODO: Mejorar
+		request.data['id_user'] = str(request.user.id) #TODO: Mejorar implementacion
 		serializer = ClientSerializer(data=request.data)
 		serializer.is_valid()
 		serializer.save()
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+	def retrieve(self, request, pk=None):
+		queryset = Client.objects.get(id=pk)
+		serializer = ClientSerializer(queryset)
+		return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+	def destroy(self, request, pk=None):
+		print(pk)
+		return Response(status=status.HTTP_200_OK)
+
 	def list(self, request):
 		queryset = Client.objects.filter(id_user=request.user.id)
 		serializer = ClientSerializer(queryset, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class ProductViewSet(viewsets.ViewSet):
 	permission_classes = [permissions.IsAuthenticated]

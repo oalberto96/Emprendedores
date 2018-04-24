@@ -43,15 +43,24 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   })
 
   .state('home.addClient', {
-    url: '/clients',
+    url: '/client/add',
     views: {
       'clients': {
         templateUrl: 'templates/client/add-client.html',
-        controller: 'ClientCtrl'
+        controller: 'ClientAddCtrl'
       }
     }
   })
 
+  .state('home.retrieveClient', {
+    url: '/clients/:clientId',
+    views: {
+      'clients': {
+        templateUrl: 'templates/client/get-client.html',
+        controller: 'ClientGetCtrl'
+      }
+    }
+  })
 
 
   .state('home.product', {

@@ -1,0 +1,37 @@
+<ion-view view-title="addClient">
+	<ion-content ng-controller="ClientGetCtrl as ctrl">
+		<div class="list" >
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">First name</span>
+		    <input type="text" placeholder="First Name" ng-model="ctrl.first_name">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Last Name</span>
+		    <input type="text" placeholder="Last Name" ng-model="ctrl.last_name">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Email</span>
+		    <input type="text" placeholder="Email" ng-model="ctrl.email">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Phone number</span>
+		    <input type="text" placeholder="Phone Number" ng-model="ctrl.phone_number">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Address</span>
+		    <input type="text" placeholder="Address" ng-model="ctrl.address">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">RFC</span>
+		    <input type="text" placeholder="RFC" ng-model="ctrl.rfc">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Notes</span>
+		    <textarea rows="4" type="text" placeholder="Notes" ng-model="ctrl.notes"></textarea>
+		  </label>
+		  <!-- <button class="button button-block button-positive" ng-click="ctrl.submit()">
+	          Registrar cliente
+	      </button> -->
+		</div>
+	</ion-content>
+</ion-view>
