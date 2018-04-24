@@ -24,6 +24,9 @@ class Product (models.Model):
 	sku = models.CharField(max_length=30)
 	comment = models.CharField(max_length=130)
 
+	def __str__(self):
+		return str(self.name_product)
+
 
 class Sale(models.Model):
 	id_user = models.ForeignKey(User)

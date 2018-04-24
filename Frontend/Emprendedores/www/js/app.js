@@ -58,7 +58,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     url: '/products',
     views: {
       'products': {
-        templateUrl: 'templates/products.html',
+        templateUrl: 'templates/product/products.html',
         controller: 'ProductCtrl'
       }
     }

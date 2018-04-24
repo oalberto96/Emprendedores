@@ -16,7 +16,7 @@
 		this.retrieveClients = function(){
 			$http({
 				method: 'GET',
-				url: REST_SERVER + '/api/clients/'
+				url: REST_SERVER + '/api/sale/clients'
 			})
 			.success(function(result){
 				for (var i = 0; i < result.length; i++) {
@@ -37,7 +37,7 @@
 					"rfc": rfc,
 					"notes": notes
 				},
-				url: REST_SERVER + '/api/clients/'
+				url: REST_SERVER + '/api/sale/clients'
 			})
 			.success(function(result){
 				clients.push(result);

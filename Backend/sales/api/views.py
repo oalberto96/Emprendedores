@@ -6,25 +6,30 @@ from rest_framework.authtoken.models import Token
 
 from django.contrib.auth.models import User
 
-from sales.api.serializers import ClientSerializer
-from sales.models import Client
+from sales.api.serializers import ClientSerializer, ProductSerializer
+from sales.models import Client, Product
 
 class ClientViewSet(viewsets.ViewSet):
 	permission_classes = [permissions.IsAuthenticated]
 	serializer_class = ClientSerializer
 
 	def create(self, request):
-		request.data['id_user'] = str(request.user.id)
-		print(request.data)
+		request.data['id_user'] = str(request.user.id) #TODO: Mejorar
 		serializer = ClientSerializer(data=request.data)
 		serializer.is_valid()
 		serializer.save()
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 	def list(self, request):
-		'''
-		Listar todos los clientes que el usuario creo
-		'''
 		queryset = Client.objects.filter(id_user=request.user.id)
 		serializer = ClientSerializer(queryset, many=True)
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
+class ProductViewSet(viewsets.ViewSet):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = ProductSerializer
+
+	def list(self, request):
+		queryset = Product.objects.filter(id_user=request.user.id)
+		serializer = ProductSerializer(queryset, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
