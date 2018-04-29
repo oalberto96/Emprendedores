@@ -40,10 +40,11 @@ function ClientAddCtrl($scope,$ionicHistory, $state ,ClientService){
 }
 
 app.controller('ClientGetCtrl', ClientGetCtrl);
-ClientGetCtrl.$inject = ['$scope', '$stateParams','$state','ClientService'];
+ClientGetCtrl.$inject = ['$scope', '$stateParams','$ionicHistory', '$state',  'ClientService'];
 
-function ClientGetCtrl($scope, $stateParams, $state ,ClientService){
+function ClientGetCtrl($scope, $stateParams, $ionicHistory, $state,  ClientService){
 	ctrl = this;
+
 	this.retrieveClient = function () {
 
 		ClientService.retrieveClient($stateParams.clientId)
@@ -57,6 +58,14 @@ function ClientGetCtrl($scope, $stateParams, $state ,ClientService){
 			ctrl.notes = result.notes;
 		});
 	}
+
+	this.deleteClient = function(){
+		ClientService.deleteClient($stateParams.clientId)
+		.success(function(result){
+			$state.go('home.client');
+		});
+	}
+
 	this.retrieveClient();
 }
 })();

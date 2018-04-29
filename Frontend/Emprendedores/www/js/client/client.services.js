@@ -26,10 +26,25 @@
 		}
 
 		this.retrieveClient = function(clientId){
-			console.log(REST_SERVER + 'api/sale/clients/' + clientId.toString());
 			return $http({
 				method: 'GET',
 				url: REST_SERVER + '/api/sale/clients/' + clientId.toString()
+			});
+		}
+
+		this.deleteClient = function(clientId){
+			return $http({
+				method: 'DELETE',
+				url: REST_SERVER + '/api/sale/clients/' + clientId.toString()
+			})
+			.success(function(result){
+				if (clients) {
+					var result = clients.filter(function(obj){
+						return obj.id == clientId;
+					});
+					var i = clients.indexOf(result[0]);
+					clients.splice(i, 1);
+				}
 			});
 		}
 

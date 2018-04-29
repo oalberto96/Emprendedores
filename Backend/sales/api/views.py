@@ -26,8 +26,8 @@ class ClientViewSet(viewsets.ViewSet):
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 	def destroy(self, request, pk=None):
-		print(pk)
-		return Response(status=status.HTTP_200_OK)
+		Client.objects.filter(id=pk).delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)
 
 	def list(self, request):
 		queryset = Client.objects.filter(id_user=request.user.id)
