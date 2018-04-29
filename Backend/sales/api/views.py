@@ -25,6 +25,16 @@ class ClientViewSet(viewsets.ViewSet):
 		serializer = ClientSerializer(queryset)
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+	def update(self, request, pk=None):
+		queryset = Client.objects.get(id=pk)
+		request.data['id_user'] = str(request.user.id)
+		serializer = ClientSerializer(queryset, request.data, many=False)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+		print(serializer.data)
+		return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
 	def destroy(self, request, pk=None):
 		Client.objects.filter(id=pk).delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)

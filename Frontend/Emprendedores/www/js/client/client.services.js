@@ -32,6 +32,41 @@
 			});
 		}
 
+		this.updateClient = function (clientId, first_name,last_name,email,phone_number,address,rfc,notes){
+			return $http({
+				method: 'PUT',
+				data: {
+					"first_name": first_name,
+					"last_name": last_name,
+					"email": email,
+					"phone_number": phone_number,
+					"address": address,
+					"rfc": rfc,
+					"notes": notes
+				},
+				url: REST_SERVER + '/api/sale/clients/' + clientId.toString() 
+			})
+			.success(function(response){
+				if (clients) {
+					var result = clients.filter(function(obj){
+						return obj.id == clientId;
+					});
+					var i = clients.indexOf(result[0]);
+					clients[i] = {
+						"id": response.id,
+						"id_user": response.id,
+						"first_name": response.first_name,
+						"last_name": response.last_name,
+						"email": response.email,
+						"phone_number": response.phone_number,
+						"address": response.address,
+						"rfc": response.rfc,
+						"notes": response.notes
+					}
+				}
+			});
+		}
+
 		this.deleteClient = function(clientId){
 			return $http({
 				method: 'DELETE',
@@ -47,6 +82,8 @@
 				}
 			});
 		}
+
+
 
 		this.addClient = function (first_name,last_name,email,phone_number,address,rfc,notes){
 			return $http({

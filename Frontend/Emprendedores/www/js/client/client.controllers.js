@@ -59,6 +59,22 @@ function ClientGetCtrl($scope, $stateParams, $ionicHistory, $state,  ClientServi
 		});
 	}
 
+	this.updateClient = function(){
+		ClientService.updateClient(
+			$stateParams.clientId,
+			this.first_name,
+			this.last_name,
+			this.email,
+			this.phone_number,
+			this.address,
+			this.rfc,
+			this.notes
+			)
+		.success(function(result){
+			$state.go($ionicHistory.backView().stateName);
+		});
+	}
+
 	this.deleteClient = function(){
 		ClientService.deleteClient($stateParams.clientId)
 		.success(function(result){
