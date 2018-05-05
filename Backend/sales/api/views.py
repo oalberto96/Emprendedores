@@ -21,6 +21,7 @@ class ClientViewSet(viewsets.ViewSet):
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 	def retrieve(self, request, pk=None):
+		group_required = ['ulevel0']
 		queryset = Client.objects.get(id=pk)
 		serializer = ClientSerializer(queryset)
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
