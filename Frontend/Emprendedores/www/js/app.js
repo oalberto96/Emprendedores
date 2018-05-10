@@ -93,6 +93,26 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     }
   })
 
+  .state('home.addProduct', {
+    url: '/product/add',
+    views: {
+      'products': {
+        templateUrl: 'templates/product/add-product.html',
+        controller: 'ProductAddCtrl'
+      }
+    }
+  })
+
+  .state('home.retrieveProduct', {
+    url: '/products/:productId',
+    views: {
+      'products': {
+        templateUrl: 'templates/product/get-product.html',
+        controller: 'ProductGetCtrl'
+      }
+    }
+  })  
+
   
 
   .state('login', {

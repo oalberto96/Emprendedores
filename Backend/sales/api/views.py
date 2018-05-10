@@ -55,6 +55,37 @@ class ProductViewSet(viewsets.ViewSet):
 		serializer = ProductSerializer(queryset, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
+	def create(self, request):
+		request.data['id_user'] = str(request.user.id) #TODO: Mejorar implementacion
+		serializer = ProductSerializer(data=request.data)
+		serializer.is_valid()
+		serializer.save()
+		return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+	def retrieve(self, request, pk=None):
+		queryset = Product.objects.get(id=pk)
+		serializer = ProductSerializer(queryset)
+		return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+	def update(self, request, pk=None):
+		queryset = Product.objects.get(id=pk)
+		request.data['id_user'] = str(request.user.id)
+		serializer = ProductSerializer(queryset, request.data, many=False)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+		print(serializer.data)
+		return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+	def destroy(self, request, pk=None):
+		Product.objects.filter(id=pk).delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)
+	
+	def list(self, request):
+		queryset = Product.objects.filter(id_user=request.user.id)
+		serializer = ProductSerializer(queryset, many=True)
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class SaleViewSet(viewsets.ViewSet):
 	permission_classes = [permissions.IsAuthenticated]
