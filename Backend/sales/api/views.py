@@ -6,7 +6,7 @@ from rest_framework.authtoken.models import Token
 
 from django.contrib.auth.models import User
 
-from sales.api.serializers import ClientSerializer, ProductSerializer
+from sales.api.serializers import ClientSerializer, ProductSerializer, SaleSerializer
 from sales.models import Client, Product
 
 class ClientViewSet(viewsets.ViewSet):
@@ -54,3 +54,17 @@ class ProductViewSet(viewsets.ViewSet):
 		queryset = Product.objects.filter(id_user=request.user.id)
 		serializer = ProductSerializer(queryset, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class SaleViewSet(viewsets.ViewSet):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = SaleSerializer
+
+	def create(self, request):
+		request.data['id_user'] = str(request.user.id) #TODO: Mejorar implementacion
+		serializer = SaleSerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		else:
+			return Response(status=status.HTTP_406_NOT_ACCEPTABLE)

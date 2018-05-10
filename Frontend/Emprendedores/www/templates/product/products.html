@@ -8,7 +8,7 @@
 		</div>
 		<div ng-controller="ProductListCtrl as ctrl">
 			<div class="list" ng-repeat="client in ctrl.products">
-				<a class="item item-avatar">
+				<a class="item item-avatar" on-long-press="ctrl.itemOnLongPress($index)">
 					<!-- <img src="venkman.jpg"> -->
 					<h2 ng-bind="client.name_product" ></h2>
 					<p ng-bind="'$' + client.price"></p>

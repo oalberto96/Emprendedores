@@ -32,13 +32,25 @@ class Product (models.Model):
 class Sale(models.Model):
 	id_user = models.ForeignKey(settings.AUTH_USER_MODEL)
 	id_client = models.ForeignKey(Client)
-	id_product = models.ForeignKey(Product)
 	date = models.DateTimeField (auto_now=False)
 	discount = models.FloatField()
 	subtotal = models.FloatField()
 	pay_type = models.CharField(max_length=30)
 	total = models.FloatField()
 	finished = models.BooleanField()
+
+	def __str__(self):
+		return str(self.id) + " " + str(self.total)
+
+
+class SaleProduct(models.Model):
+	id_sale = models.ForeignKey(Sale)
+	id_product = models.ForeignKey(Product)
+	quantity = models.FloatField()
+
+	def __str__(self):
+		return "id: " + str(self.id_sale) + " " + str(self.id_product) + " " + str(self.quantity) 
+
 
 class Pay(models.Model):
 	id_sale = models.ForeignKey(Sale)

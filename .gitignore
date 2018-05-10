@@ -1,5 +1,9 @@
 emprendedoresEnv
 
+#MySQL Workbench
+
+*.mwb.bak
+
 #Django 
 
 *.egg-info
