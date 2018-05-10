@@ -1,0 +1,18 @@
+<ion-view view-title="sales">
+	<ion-content ng-controller="SaleCtrl as ctrl">
+		<div class="row">
+			<div class="col">Cantidad</div>
+			<div class="col">Producto</div>
+			<div class="col">Importe</div>
+		</div>
+		<hr/>
+		<div class="row" ng-repeat="product in ctrl.sale.products">
+			<div class="col" ng-bind="product.quantity"></div>
+			<div class="col" ng-bind="product.name_product"></div>
+			<div class="col" ng-bind="product.price"></div>
+		</div>
+		<button class="button button-full button-positive" ng-click="ctrl.submit();">
+		  Pagar $<span ng-bind="ctrl.total();"></span> MXN
+		</button>
+	</ion-content>
+</ion-view>

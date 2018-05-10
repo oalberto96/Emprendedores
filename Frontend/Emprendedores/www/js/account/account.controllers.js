@@ -70,9 +70,13 @@ app.controller('ProductCtrl',function($scope){
 
 });
 
+
 app.controller('ClientCtrl',function($scope){
 	
+	
 });
+
+
 
 
 })();
