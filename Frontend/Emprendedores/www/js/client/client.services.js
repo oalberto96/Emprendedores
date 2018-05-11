@@ -8,7 +8,7 @@
 	ClientService.$inject = ['$http','REST_SERVER'];
 	function ClientService($http, REST_SERVER) {
 		var clients = [];
-
+		
 		this.getClients = function(){
 			return clients;
 		}
@@ -24,6 +24,7 @@
 				}
 			});
 		}
+		this.retrieveClients();
 
 		this.retrieveClient = function(clientId){
 			return $http({

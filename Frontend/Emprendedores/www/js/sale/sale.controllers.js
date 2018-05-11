@@ -22,13 +22,14 @@ function SaleListCtrl(SaleService){
 }
 
 app.controller('SaleCtrl', SaleCtrl);
-SaleCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$ionicHistory', 'SaleService'];
-function SaleCtrl($scope, $state, $ionicPopup, $ionicHistory,  SaleService){
+SaleCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$ionicHistory', 'SaleService', 'ClientService'];
+function SaleCtrl($scope, $state, $ionicPopup, $ionicHistory,  SaleService, ClientService){
 	var ctrl = this;
+	ctrl.clients = ClientService.getClients();
 	ctrl.sale = SaleService.getSale();
 
 	ctrl.submit = function(){
-		SaleService.createSale()
+		SaleService.createSale(ctrl.clientSelected, ctrl.total())
 		.then(function(result){
 			ctrl.sale = SaleService.getSale();
 			ctrl.total();

@@ -11,8 +11,19 @@
 			<div class="col" ng-bind="product.name_product"></div>
 			<div class="col" ng-bind="product.price"></div>
 		</div>
+		<div class="list">
+
+			<label class="item item-input item-select">
+				<div class="input-label">
+					Cliente
+				</div>
+				<select ng-options="client as client.first_name for client in ctrl.clients track by client.id" ng-model="ctrl.clientSelected"></select>
+			</label>
+
+		</div>
+
 		<button class="button button-full button-positive" ng-click="ctrl.submit();">
-		  Pagar $<span ng-bind="ctrl.total();"></span> MXN
+			Pagar $<span ng-bind="ctrl.total();"></span> MXN
 		</button>
 	</ion-content>
 </ion-view>

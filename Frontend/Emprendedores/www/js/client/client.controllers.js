@@ -14,7 +14,6 @@ function ClientListController($scope,$state, ClientService){
 		$state.go(path);
 	}
 
-	ClientService.retrieveClients();
 	this.clients = ClientService.getClients();
 }
 

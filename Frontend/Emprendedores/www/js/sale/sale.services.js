@@ -56,7 +56,7 @@
 			return sale;
 		}
 
-		service.createSale = function(){
+		service.createSale = function(client, total){
 			var products = []
 			//Send only product's id
 			sale.products.forEach(function(product){
@@ -70,17 +70,18 @@
 				method: 'POST',
 				data: {
 					"id_user": sale.id_user,
-					"id_client": sale.id_client,
+					"id_client": client.id,
 					"products": products,
 					"date": new Date(),
 					"discount": sale.discount,
 					"subtotal": sale.subtotal,
 					"pay_type": sale.pay_type,
-					"total": 	sale.total,
+					"total": 	total,
 					"finished": sale.finished
 				},
 				url: REST_SERVER + '/api/sale/sales'
 			}).then(function(result){
+				sales.push(result.data);
 				saleInit();
 			});
 		}
