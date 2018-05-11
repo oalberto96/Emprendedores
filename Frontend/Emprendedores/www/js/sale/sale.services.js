@@ -8,6 +8,7 @@
 
 	function SaleService($http, REST_SERVER) {
 		var service = this;
+		var sales = [];
 		var sale = {
 			"id_user": null,
 			"id_client": 1,
@@ -47,8 +48,11 @@
 			}
 		}
 
+		service.getSales = function(){
+			return sales;
+		}
+
 		service.getSale = function(){
-			console.log(sale);
 			return sale;
 		}
 
@@ -78,6 +82,17 @@
 				url: REST_SERVER + '/api/sale/sales'
 			}).then(function(result){
 				saleInit();
+			});
+		}
+
+		service.retrieveSales = function(){
+			return $http({
+				method: 'GET',
+				url: REST_SERVER + '/api/sale/sales'
+			}).then(function(result){
+				for (var i = 0; i < result.data.length; i++) {
+					sales.push(result.data[i]);
+				}
 			});
 		}
 	}

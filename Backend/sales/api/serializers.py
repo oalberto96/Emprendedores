@@ -18,11 +18,17 @@ class SaleSerializer(serializers.ModelSerializer):
 	products = serializers.ListField(
 			child = serializers.DictField()
 		)
+	client = serializers.SerializerMethodField(read_only=True)
 
 	class Meta:
 		model = Sale
-		fields = ['id_user', 'id_client',  'date', 'products',
+		fields = ['id_user', 'id_client', 'client', 'date', 'products',
 		'discount', 'subtotal', 'pay_type', 'total', 'finished']
+
+	def get_client(self, obj):
+		client = obj.id_client
+		serilaizer = ClientSerializer(client)
+		return serilaizer.data
 
 	def create(self, validated_data):
 		sale = Sale()
@@ -40,7 +46,7 @@ class SaleSerializer(serializers.ModelSerializer):
 		for product in sale.products:
 			sale_product = SaleProduct()
 			sale_product.id_sale = sale
-			sale_product.id_product = Product.objects.get(id=product['id_product'])
+			sale_product.product = Product.objects.get(id=product['id_product'])
 			sale_product.quantity = product['quantity']
 			sale_product.save()
 

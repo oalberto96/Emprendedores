@@ -13,6 +13,14 @@ function SalesCtrl($scope, $state){
 	}
 }
 
+app.controller('SaleListCtrl', SaleListCtrl);
+SaleListCtrl.$inject = ['SaleService'];
+function SaleListCtrl(SaleService){
+	var ctrl = this;
+	SaleService.retrieveSales();
+	ctrl.sales = SaleService.getSales();
+}
+
 app.controller('SaleCtrl', SaleCtrl);
 SaleCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$ionicHistory', 'SaleService'];
 function SaleCtrl($scope, $state, $ionicPopup, $ionicHistory,  SaleService){

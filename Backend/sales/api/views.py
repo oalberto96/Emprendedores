@@ -7,7 +7,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 from sales.api.serializers import ClientSerializer, ProductSerializer, SaleSerializer
-from sales.models import Client, Product
+from sales.models import Client, Product, Sale
 
 class ClientViewSet(viewsets.ViewSet):
 	permission_classes = [permissions.IsAuthenticated]
@@ -99,3 +99,8 @@ class SaleViewSet(viewsets.ViewSet):
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		else:
 			return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+	def list(self, request):
+		queryset = Sale.rel_objects.with_products(sale_owner=request.user.id)
+		serializer = SaleSerializer(queryset, many=True)
+		return Response(serializer.data, status=status.HTTP_200_OK)

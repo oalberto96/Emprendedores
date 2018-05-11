@@ -1,13 +1,21 @@
 <ion-view view-title="sales">
-	<ion-content class="padding">
+	<ion-content class="padding" ng-controller="SaleListCtrl as ctrl">
 		<div class="list list-inset">
 			<label class="item item-input">
 				<i class="icon ion-search placeholder-icon"></i>
 				<input type="text" placeholder="Search">
 			</label>
 		</div>
+		<div class="list" ng-repeat="sale in ctrl.sales">
+			<a class="item item-avatar" >
+				<!-- <img src="venkman.jpg"> -->
+				<h2 ng-bind="sale.client.first_name + ' ' + sale.client.last_name"></h2>
+				<h2 ng-bind="'Total: $' + sale.total"></h2>
+				<p ng-bind="sale.date | date: 'short'"></p>
+			</a>
+		</div>
 		<button class="button button-block button-positive" ng-click="go('home.addSale');">
-	          Registrar nueva venta
-	      </button>
+			Registrar nueva venta
+		</button>
 	</ion-content>
 </ion-view>

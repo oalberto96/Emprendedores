@@ -28,6 +28,12 @@ class Product (models.Model):
 	def __str__(self):
 		return str(self.name_product)
 
+class SaleManager(models.Manager):
+	def with_products(self, sale_owner):
+		queryset = Sale.objects.filter(id_user = sale_owner)
+		for sale in queryset:
+			sale.products = [{sale_product.product.id: sale_product.quantity for sale_product in SaleProduct.objects.filter(id_sale = sale.id)}]
+		return queryset
 
 class Sale(models.Model):
 	id_user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -39,17 +45,21 @@ class Sale(models.Model):
 	total = models.FloatField()
 	finished = models.BooleanField()
 
+	objects = models.Manager()
+	rel_objects = SaleManager() #Relational queries
+	products = []
+
 	def __str__(self):
 		return str(self.id) + " " + str(self.total)
 
 
 class SaleProduct(models.Model):
 	id_sale = models.ForeignKey(Sale)
-	id_product = models.ForeignKey(Product)
+	product = models.ForeignKey(Product)
 	quantity = models.FloatField()
 
 	def __str__(self):
-		return "id: " + str(self.id_sale) + " " + str(self.id_product) + " " + str(self.quantity) 
+		return "id: " + str(self.id_sale) + " " + str(self.product) + " " + str(self.quantity) 
 
 
 class Pay(models.Model):
