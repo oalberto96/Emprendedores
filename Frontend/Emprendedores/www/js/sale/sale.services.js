@@ -96,5 +96,12 @@
 				}
 			});
 		}
+
+		service.retrieveSale = function(saleId){
+			return $http({
+				method: 'GET',
+				url: REST_SERVER + '/api/sale/sales/' + saleId.toString()
+			})
+		}
 	}
 })();

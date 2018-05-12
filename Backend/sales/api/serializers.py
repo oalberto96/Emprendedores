@@ -19,10 +19,11 @@ class SaleSerializer(serializers.ModelSerializer):
 			child = serializers.DictField()
 		)
 	client = serializers.SerializerMethodField(read_only=True)
+	id = serializers.IntegerField(read_only=True)
 
 	class Meta:
 		model = Sale
-		fields = ['id_user', 'id_client', 'client', 'date', 'products',
+		fields = ['id','id_user', 'id_client', 'client', 'date', 'products',
 		'discount', 'subtotal', 'pay_type', 'total', 'finished']
 
 	def get_client(self, obj):

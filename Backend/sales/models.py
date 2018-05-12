@@ -35,6 +35,21 @@ class SaleManager(models.Manager):
 			sale.products = [{sale_product.product.id: sale_product.quantity for sale_product in SaleProduct.objects.filter(id_sale = sale.id)}]
 		return queryset
 
+	def get(self, id):
+		sale = Sale.objects.get(id=id)
+		products = []
+		for sale_product in SaleProduct.objects.filter(id_sale = sale.id):
+			product = {}
+			product['id_user'] = sale_product.product.id_user.id
+			product['name_product'] = sale_product.product.name_product
+			product['price'] = sale_product.product.price
+			product['sku'] = sale_product.product.sku
+			product['comment'] = sale_product.product.comment
+			product['quantity'] = sale_product.quantity
+			products.append(product)
+		sale.products = products
+		return sale
+
 class Sale(models.Model):
 	id_user = models.ForeignKey(settings.AUTH_USER_MODEL)
 	id_client = models.ForeignKey(Client)

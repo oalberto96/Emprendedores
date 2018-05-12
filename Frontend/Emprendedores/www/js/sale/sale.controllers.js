@@ -1,50 +1,60 @@
 (function(){
 	"use-strict";
-var app = angular.module('emprendedores');
+	var app = angular.module('emprendedores');
 
-app.controller('SalesCtrl', SalesCtrl);
+	app.controller('SalesCtrl', SalesCtrl);
 
-SalesCtrl.$inject = ['$scope','$state'];
+	SalesCtrl.$inject = ['$scope','$state'];
 
-function SalesCtrl($scope, $state){
+	function SalesCtrl($scope, $state){
 
-	$scope.go = function(path){
-		$state.go(path);
+		$scope.go = function(path){
+			$state.go(path);
+		}
 	}
-}
 
-app.controller('SaleListCtrl', SaleListCtrl);
-SaleListCtrl.$inject = ['SaleService'];
-function SaleListCtrl(SaleService){
-	var ctrl = this;
-	SaleService.retrieveSales();
-	ctrl.sales = SaleService.getSales();
-}
+	app.controller('SaleListCtrl', SaleListCtrl);
+	SaleListCtrl.$inject = ['SaleService'];
+	function SaleListCtrl(SaleService){
+		var ctrl = this;
+		SaleService.retrieveSales();
+		ctrl.sales = SaleService.getSales();
+	}
 
-app.controller('SaleCtrl', SaleCtrl);
-SaleCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$ionicHistory', 'SaleService', 'ClientService'];
-function SaleCtrl($scope, $state, $ionicPopup, $ionicHistory,  SaleService, ClientService){
-	var ctrl = this;
-	ctrl.clients = ClientService.getClients();
-	ctrl.sale = SaleService.getSale();
+	app.controller('SaleAddCtrl', SaleAddCtrl);
+	SaleAddCtrl.$inject = ['$scope', '$state', '$ionicPopup', '$ionicHistory', 'SaleService', 'ClientService'];
+	function SaleAddCtrl($scope, $state, $ionicPopup, $ionicHistory,  SaleService, ClientService){
+		var ctrl = this;
+		ctrl.sale = SaleService.getSale();
+		ctrl.clients = ClientService.getClients();
 
-	ctrl.submit = function(){
-		SaleService.createSale(ctrl.clientSelected, ctrl.total())
+		ctrl.submit = function(){
+			SaleService.createSale(ctrl.clientSelected, ctrl.total())
+			.then(function(result){
+				ctrl.sale = SaleService.getSale();
+				ctrl.total();
+				$state.go($ionicHistory.backView().stateName);
+			});
+		}
+
+		ctrl.total = function(){
+			var total = 0;
+			ctrl.sale.products.forEach(function(item){
+				total += item.price * item.quantity;
+			})
+			return total;
+		}
+	}
+
+	app.controller('SaleGetCtrl', SaleGetCtrl);
+	SaleGetCtrl.$inject = ['$stateParams', 'SaleService'];
+	function SaleGetCtrl($stateParams, SaleService){
+		var ctrl = this;
+		SaleService.retrieveSale($stateParams.saleId)
 		.then(function(result){
-			ctrl.sale = SaleService.getSale();
-			ctrl.total();
-			$state.go($ionicHistory.backView().stateName);
+			ctrl.sale = result.data;
 		});
 	}
-
-	ctrl.total = function(){
-		var total = 0;
-		ctrl.sale.products.forEach(function(item){
-			total += item.price * item.quantity;
-		})
-		return total;
-	}
-}
 
 
 })();

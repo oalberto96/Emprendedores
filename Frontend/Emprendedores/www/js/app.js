@@ -82,6 +82,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     }
   })
 
+  .state('home.retrieveSale', {
+    url: '/sales/:saleId',
+    views: {
+      'sales': {
+        templateUrl: 'templates/sale/get-sale.html',
+        controller: 'SalesCtrl'
+      }
+    }
+  })
 
   .state('home.product', {
     url: '/products',

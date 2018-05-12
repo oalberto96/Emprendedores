@@ -100,6 +100,11 @@ class SaleViewSet(viewsets.ViewSet):
 		else:
 			return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
+	def retrieve(self, request, pk=None):
+		queryset = Sale.rel_objects.get(id=pk)
+		serializer = SaleSerializer(queryset)
+		return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 	def list(self, request):
 		queryset = Sale.rel_objects.with_products(sale_owner=request.user.id)
 		serializer = SaleSerializer(queryset, many=True)

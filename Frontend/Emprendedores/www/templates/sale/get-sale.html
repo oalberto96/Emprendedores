@@ -1,5 +1,5 @@
-<ion-view view-title="sales">
-	<ion-content ng-controller="SaleAddCtrl as ctrl">
+<ion-view view-title="Agregar Venta">
+	<ion-content ng-controller="SaleGetCtrl as ctrl">
 		<div class="row">
 			<div class="col">Cantidad</div>
 			<div class="col">Producto</div>
@@ -12,16 +12,14 @@
 			<div class="col" ng-bind="product.price"></div>
 		</div>
 		<div class="list">
-
 			<label class="item item-input item-select">
 				<div class="input-label">
 					Cliente
 				</div>
-				<select ng-options="client as client.first_name for client in ctrl.clients track by client.id" ng-model="ctrl.clientSelected"></select>
+				<select>
+					<option selected ng-bind=ctrl.sale.client.first_name></option>
+				</select>
 			</label>
 		</div>
-		<button class="button button-full button-positive" ng-click="ctrl.submit();">
-			Pagar $<span ng-bind="ctrl.total();"></span> MXN
-		</button>
 	</ion-content>
 </ion-view>
