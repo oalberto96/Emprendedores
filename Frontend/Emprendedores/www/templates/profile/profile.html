@@ -1,17 +1,24 @@
 <ion-view view-title="Perfil">
-  <ion-content class="padding">
+  <ion-content class="padding" ng-controller="ProfileGetCtrl as ctrl">
   	<div class="list list-inset" align = "center">
 		<img src="img/perfil2.png" style="width: 100px; height: 100px;">
 	</div>
-
-	<div>
-		<div class="list">
-			<!-- <img src="venkman.jpg"> -->
-			<!--<h2 ng-bind="profile.name_product" ></h2>-->
-			<!--<p ng-bind="'$' + product.price"></p>-->
+	<div class="list">
+		<label class="item item-input item-floating-label">
+		  <span class="input-label">Name user</span>
+		  <input type="text" placeholder="Name user" ng-model="ctrl.first_name">
+		</label>
+		<label class="item item-input item-floating-label">
+		  <span class="input-label">Last name user</span>
+		  <input type="text" placeholder="Last Name User" ng-model="ctrl.last_name">
+		</label>
+		<label class="item item-input item-floating-label">
+		  <span class="input-label">Email</span>
+		  <input type="text" placeholder="Email" ng-model="ctrl.email" >
+		</label>
+		<button class="button button-block button-assertive">
+	          Logout
+	    </button>
 	</div>
-
-	
-
-  </ion-content>
+</ion-content>
 </ion-view>

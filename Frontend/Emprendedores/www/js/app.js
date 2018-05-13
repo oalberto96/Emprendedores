@@ -146,7 +146,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     views: {
       'profile': {
         templateUrl: 'templates/profile/profile.html',
-        //controller: 'ProfileCtrl'
+        controller: 'ProfileGetCtrl'
       }
     }
   })
