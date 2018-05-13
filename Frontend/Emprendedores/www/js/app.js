@@ -120,9 +120,25 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'ProductGetCtrl'
       }
     }
-  })  
+  })
 
-  
+  .state('services', {
+    url: "/services",
+    templateUrl: "templates/account/services.html",
+    controller: 'AccountCtrl'
+  })
+
+  .state('services-pay', {
+    url: "/services/:serviceId",
+    templateUrl: "templates/account/services-pay.html",
+    controller: 'AccountCtrl'
+  })
+
+  .state('register-business', {
+    url: "business/register",
+    templateUrl: "templates/business/business-register.html",
+    controller: 'BusinessCtrl'
+  })
 
   .state('login', {
     url: "/login",

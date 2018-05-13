@@ -36,4 +36,23 @@ function LoginService($http, $cookies, REST_SERVER) {
 		});
 	}
 }
+
+app.service('AccountService', AccountService);
+AccountService.$inject = ['$http', 'REST_SERVER'];
+function AccountService($http, REST_SERVER){
+	var service = this;
+	service.checkUserServices = function(){
+		return $http({
+			method: 'GET',
+			url: REST_SERVER + '/api/account/service/check'
+		});
+	} 
+
+	service.buyService = function(serviceId){
+		return $http({
+			method: 'GET',
+			url: REST_SERVER + '/api/account/service/buy/' + serviceId.toString()
+		});
+	}
+}
 })();

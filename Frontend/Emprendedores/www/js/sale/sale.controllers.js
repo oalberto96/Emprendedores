@@ -1,15 +1,23 @@
 (function(){
 	"use-strict";
 	var app = angular.module('emprendedores');
-
+	//Cambiar esto a perfil
 	app.controller('SalesCtrl', SalesCtrl);
 
-	SalesCtrl.$inject = ['$scope','$state'];
+	SalesCtrl.$inject = ['$scope','$state', 'AccountService'];
 
-	function SalesCtrl($scope, $state){
-
+	function SalesCtrl($scope, $state, AccountService){
 		$scope.go = function(path){
 			$state.go(path);
+		}
+
+		$scope.checkService = function(){
+			AccountService.checkUserServices()
+			.then(function(result){
+				if (result.status == 204) {
+					$state.go('services');
+				}
+			});
 		}
 	}
 

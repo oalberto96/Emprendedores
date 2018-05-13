@@ -24,3 +24,8 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 			)
 		print(user)
 		return user
+
+class ServiceUserSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = get_user_model()
+		fields = ['group','service']

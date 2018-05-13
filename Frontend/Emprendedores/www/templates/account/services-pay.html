@@ -1,0 +1,11 @@
+<ion-view view-title="sales">
+	<ion-content class="padding" ng-controller="ServiceShoppingCtrl as ctrl">
+		<h1>Pago servicio <span ng-bind="ctrl.serviceId"></span></h1>
+		<p>
+			Datos de pago
+		</p>
+		<button class="button button-block button-positive" ng-click="ctrl.buyService();">
+		  Pagar
+		</button>
+	</ion-content>
+</ion-view>

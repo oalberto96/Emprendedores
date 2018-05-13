@@ -3,6 +3,15 @@
 
 var app = angular.module('emprendedores');
 
+app.controller('AccountCtrl', AccountCtrl);
+AccountCtrl.$inject = ['$scope'];
+function AccountCtrl($scope){
+	$scope.go = function(path){
+		$state.go(path)
+	}
+
+}
+
 app.controller('LoginCtrl',LoginCtrl);
 
 LoginCtrl.$inject = ['$scope','$state', 'LoginService'];
@@ -75,6 +84,27 @@ app.controller('ClientCtrl',function($scope){
 	
 	
 });
+
+app.controller('ServiceShoppingCtrl', ServiceShoppingCtrl);
+ServiceShoppingCtrl.$inject = ['$scope', '$stateParams', '$state', 'AccountService'];
+
+function ServiceShoppingCtrl($scope, $stateParams, $state, AccountService){
+	var ctrl = this;
+	ctrl.serviceId = $stateParams.serviceId;
+
+	// ctrl.selectService = function(service){
+	// 	$scope.go('#/home/sales/{{sale.id}}');
+	// }
+
+	ctrl.buyService = function(){
+		AccountService.buyService(ctrl.serviceId)
+		.then(function(result){
+			if (result.status = 202) {
+				$state.go('register-business');
+			}
+		})
+	}
+}
 
 
 
