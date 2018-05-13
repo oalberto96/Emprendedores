@@ -19,6 +19,14 @@ function ProfileGetCtrl($scope, $stateParams, $ionicHistory, $state,  ProfileSer
 			ctrl.email = result.email;
 		});
 	}
+
+	this.logout = function(){
+		
+		ProfileService.logoutProfile()
+		.success(function(result){
+			$state.go('login');
+		});
+	} 
 	this.retrieveProfile();
 }
 })();

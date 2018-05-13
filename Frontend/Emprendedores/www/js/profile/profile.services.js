@@ -14,6 +14,13 @@
 				url: REST_SERVER + '/api/account/user'
 			});
 		}
+
+		this.logoutProfile = function(){
+			return $http({
+				method: 'GET',
+				url: REST_SERVER + '/api/account/logout/'
+			});
+		}
 	}
 
 

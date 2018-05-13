@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
 from django.views.decorators.csrf import csrf_exempt
 from django.middleware.csrf import get_token
@@ -67,6 +67,13 @@ class User(APIView):
 		response ['email'] = request.user.email
 		return Response(response, status=status.HTTP_200_OK)
 
+class Logout(APIView):
+	permission_classes = [permissions.IsAuthenticated]
+
+	def get(self,request):
+		logout(request)
+		#request.user.logout()
+		return Response(status=status.HTTP_200_OK)
 
 @api_view()
 def buy_service(request, pk=None):
