@@ -5,8 +5,8 @@
 
 	app.service('ProfileService', ProfileService);
 
-	ProfileService.$inject = ['$http','REST_SERVER'];
-	function ProfileService($http, REST_SERVER) {
+	ProfileService.$inject = ['$http','$cookies','REST_SERVER'];
+	function ProfileService($http,$cookies, REST_SERVER) {
 		
 		this.retrieveProfile = function(){
 			return $http({
@@ -19,6 +19,11 @@
 			return $http({
 				method: 'GET',
 				url: REST_SERVER + '/api/account/logout/'
+			}).success(function(data,status,headers,config){
+				$cookies.get('csrftoken')
+				$cookies.remove('csrftoken')
+				$cookies.get('sessionid')
+				$cookies.remove('sessionid')
 			});
 		}
 	}
