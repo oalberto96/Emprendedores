@@ -10,7 +10,7 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from accounts.api.serializers import LoginUserSerializer, RegisterUserSerializer, ServiceUserSerializer
+from accounts.api.serializers import LoginUserSerializer, RegisterUserSerializer, ServiceUserSerializer, UserSerializer
 
 
 class LoginUserAPI(APIView):
@@ -54,6 +54,18 @@ class ServiceUserAPI(APIView):
 			return Response(groups[0].name, status=status.HTTP_200_OK)
 		else:
 			return Response(status=status.HTTP_204_NO_CONTENT)
+
+class User(APIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class  = UserSerializer
+
+	def get(self,request):
+		response = {}
+		response ['username'] = request.user.username
+		response ['first_name'] = request.user.first_name
+		response ['last_name'] = request.user.last_name
+		response ['email'] = request.user.email
+		return Response(response, status=status.HTTP_200_OK)
 
 
 @api_view()
