@@ -19,5 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/account/', include('accounts.api.urls'), name='accounts-api'),
-    url(r'^api/sale/', include('sales.api.urls'), name='clients-api')
+    url(r'^api/sale/', include('sales.api.urls'), name='clients-api'),
+    url(r'^api/business/', include('business.api.urls'), name='business-api')
 ]

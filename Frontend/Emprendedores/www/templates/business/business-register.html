@@ -1,4 +1,23 @@
 <ion-view view-title="sales">
-	<ion-content class="padding" ng-controller="BusinessCtrl as ctrl">
+	<ion-content class="padding" ng-controller="BusinessRegisterCtrl as ctrl">
+		<div class="row responsive-sm">
+      <div class="col-33 col-offset-33">
+        <div class="list list-inset">
+          <div>
+          <p>{{ error }}</p>
+          </div>
+          <label class="item item-input">
+            <input type="text" placeholder="Nombre del negocio" ng-model="ctrl.data.name">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="id-de-tu-negocio" ng-model="ctrl.data.url">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Descripcion" ng-model="ctrl.data.description">
+          </label>
+        </div>
+        <button class="button button-block button-positive" ng-click="ctrl.register()">Guardar</button>
+      </div>
+    </div>
 	</ion-content>
 </ion-view>

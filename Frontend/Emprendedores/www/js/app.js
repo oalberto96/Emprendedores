@@ -135,7 +135,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   })
 
   .state('register-business', {
-    url: "business/register",
+    url: "/business/register",
     templateUrl: "templates/business/business-register.html",
     controller: 'BusinessCtrl'
   })
