@@ -1,5 +1,5 @@
 (function(){
 	"use-strict";
 angular.module('emprendedores')
-.constant('REST_SERVER', 'http://192.168.1.71:8000');
+.constant('REST_SERVER', 'http://10.0.0.4:8000');
 })();

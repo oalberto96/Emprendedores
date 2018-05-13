@@ -140,6 +140,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     controller: 'BusinessCtrl'
   })
 
+  .state('business-home', {
+    url: "/:business/",
+    templateUrl: "templates/business/business-home.html",
+    controller: "BusinessCtrl"
+  })
+
 
   .state('home.profile', {
     url: '/profile',

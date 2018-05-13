@@ -1,0 +1,13 @@
+<ion-view view-title="Negocio">
+	<ion-content class="padding" ng-controller="BusinessHomeCtrl as ctrl">
+		<h1 ng-bind="ctrl.business.name"></h1>
+    <p ng-bind="ctrl.business.description"></p>
+    <div class="list" ng-repeat="product in ctrl.products">
+        <a class="item item-avatar" on-long-press="ctrl.itemOnLongPress($index)">
+          <!-- <img src="venkman.jpg"> -->
+          <h2 ng-bind="product.name_product" ></h2>
+          <p ng-bind="'$' + product.price"></p>
+        </a>
+    </div>
+	</ion-content>
+</ion-view>

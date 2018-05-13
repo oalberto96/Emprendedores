@@ -27,4 +27,24 @@
 			})
 		}
 	}
+
+	app.controller('BusinessHomeCtrl', BusinessHomeCtrl);
+	BusinessHomeCtrl.$inject = ['$state', '$stateParams', 'BusinessService', 'ProductService'];
+	function BusinessHomeCtrl($state, $stateParams, BusinessService, ProductService){
+		var ctrl = this;
+		ctrl.business = [];
+		BusinessService.getInfo($stateParams.business)
+		.then(function(result){
+			ctrl.business.name = result.data.name;
+			ctrl.business.description = result.data.description;
+			console.log(result);
+		});
+
+		ProductService.retrieveBusinessProducts($stateParams.business)
+		.then(function(result){
+			ctrl.products = ProductService.getProducts();
+		})
+
+
+	}
 })();
