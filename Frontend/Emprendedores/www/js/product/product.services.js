@@ -32,6 +32,18 @@
 			});
 		}
 
+		this.retrieveBusinessProducts = function(business){
+			return $http({
+				method: 'GET',
+				url: REST_SERVER + '/api/business/' + business.toString() + '/products'
+			})
+			.success(function(result){
+				for (var i = 0; i < result.length; i++) {
+					products.push(result[i])
+				}
+			});
+		}
+
 		this.updateProduct = function (productId, name_product,price,sku,comment){
 			return $http({
 				method: 'PUT',

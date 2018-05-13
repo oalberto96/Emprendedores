@@ -13,5 +13,12 @@ function BusinessService($http, REST_SERVER){
 			url: REST_SERVER + '/api/business/'
 		});
 	}
+
+	service.getInfo = function(businessName){
+		return $http({
+			method: 'GET',
+			url: REST_SERVER + '/api/business/' + businessName.toString()
+		})
+	}
 }
 })();
