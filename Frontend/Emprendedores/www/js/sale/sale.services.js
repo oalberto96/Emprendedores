@@ -56,6 +56,36 @@
 			return sale;
 		}
 
+		service.proceedSale = function(total, businessUrl){
+			var products = []
+			//Send only product's id
+			sale.products.forEach(function(product){
+				item = {
+					"id_product": product.id.toString(),
+					"quantity": product.quantity
+				}
+				products.push(item)
+			});
+			var data = {
+					"products": products,
+					"date": new Date(),
+					"discount": sale.discount,
+					"subtotal": sale.subtotal,
+					"pay_type": sale.pay_type,
+					"total": 	total,
+					"finished": sale.finished
+				}
+			console.log(data);
+			return $http({
+				method: 'POST',
+				data: data,
+				url: REST_SERVER + '/api/business/' + businessUrl.toString() + '/sale'
+			}).then(function(result){
+				sales.push(result.data);
+				saleInit();
+			});
+		}
+
 		service.createSale = function(client, total){
 			var products = []
 			//Send only product's id

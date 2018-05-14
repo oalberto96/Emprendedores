@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 
 from business.models import Business
 
-from sales.models import Product
+from sales.models import Product, Sale, Client
 from sales.api.serializers import ProductSerializer
 
 @api_view(['POST'])
@@ -38,3 +38,25 @@ def business_get_products(request, business_url=None):
 	queryset = Product.objects.filter(id_user=business_owner.id)
 	serializer = ProductSerializer(queryset, many=True)
 	return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def business_sale(request, business_url=None):
+	if request.method == "POST":
+		if not request.user.is_anonymous:
+			business = Business.objects.filter(url=business_url)
+			business_owner = business[0].user
+			sale = Sale()
+			sale.id_user = business_owner
+			sale.id_client = Client.objects.filter(id=1)[0] # TODO
+			sale.date = request.data.get('date')
+			sale.discount = request.data.get('discount')
+			sale.subtotal = request.data.get('subtotal')
+			sale.pay_type = request.data.get('pay_type')
+			sale.total = request.data.get('total')
+			sale.finished = request.data.get('finished')
+			sale.save()
+			return Response(status=status.HTTP_200_OK)
+		else:
+			return Response(status=status.HTTP_401_UNAUTHORIZED)
+	else:
+		return Response(status=status.HTTP_404_NOT_FOUND)

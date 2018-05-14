@@ -29,10 +29,11 @@
 	}
 
 	app.controller('BusinessHomeCtrl', BusinessHomeCtrl);
-	BusinessHomeCtrl.$inject = ['$state', '$stateParams', 'BusinessService', 'ProductService'];
-	function BusinessHomeCtrl($state, $stateParams, BusinessService, ProductService){
+	BusinessHomeCtrl.$inject = ['$scope', '$state', '$stateParams', '$ionicPopup', 'BusinessService', 'ProductService', 'SaleService'];
+	function BusinessHomeCtrl($scope, $state, $stateParams, $ionicPopup, BusinessService, ProductService, SaleService){
 		var ctrl = this;
 		ctrl.business = [];
+		ctrl.business_url = $stateParams.business;
 		BusinessService.getInfo($stateParams.business)
 		.then(function(result){
 			ctrl.business.name = result.data.name;
@@ -43,8 +44,86 @@
 		ProductService.retrieveBusinessProducts($stateParams.business)
 		.then(function(result){
 			ctrl.products = ProductService.getProducts();
+		});
+
+		this.itemOnLongPress = function(indexProduct){
+			window.navigator.vibrate(40);
+			showQuantityDialog().then(function(quantity){
+				SaleService.addProduct(ctrl.products[indexProduct], quantity);
+			});
+		}
+
+		function showQuantityDialog() {
+			return new Promise ((resolve,reject) => {
+				$scope.data = [];
+
+				var myPopup = $ionicPopup.show({
+					template: '<input type="number" ng-model="data.quantity">',
+					title: 'Cantidad',
+					subTitle: 'Ingrese cantidad de productos que desea agregar',
+					scope: $scope,
+					buttons: [
+					{ text: 'Cancelar' },
+					{
+						text: '<b>Aceptar</b>',
+						type: 'button-positive',
+						onTap: function(e) {
+							if (!$scope.data.quantity) {
+		            //don't allow the user to close unless he enters wifi password
+		            e.preventDefault();
+		        } else {
+		        	return $scope.data.quantity;
+		        }
+		    }
+		}
+		]
+	});
+				myPopup.then(function(res) {
+					if (res) {
+						resolve(res);
+					}
+				});
+			});
+		};
+	}
+
+	app.controller('ShoppingCartCtrl', ShoppingCartCtrl );
+	function ShoppingCartCtrl(){
+	}
+
+	app.controller('SCartCheckoutCtrl', SCartCheckoutCtrl );
+	SCartCheckoutCtrl.$inject = ['$scope','$state', '$stateParams', 'BusinessService', 'ProductService', 'SaleService'];
+	function SCartCheckoutCtrl($scope, $state, $stateParams, BusinessService, ProductService, SaleService){
+		var ctrl = this;
+		ctrl.sale = SaleService.getSale();
+		ctrl.business = [];
+		ctrl.business_url = $stateParams.business;
+		ctrl.business.name = ctrl.business_url;
+		BusinessService.getInfo($stateParams.business)
+		.then(function(result){
+			ctrl.business.name = result.data.name;
 		})
 
 
+		ctrl.proceed = function(){
+			SaleService.proceedSale(ctrl.total(), ctrl.business_url)
+			.then(function(result){
+				console.log(result);
+				// ctrl.sale = SaleService.getSale();
+				// ctrl.total();
+				// $state.go($ionicHistory.backView().stateName);
+			});
+		}
+
+		ctrl.total = function(){
+			var total = 0;
+			ctrl.sale.products.forEach(function(item){
+				total += item.price * item.quantity;
+			})
+			return total;
+		}
 	}
+
+
+
 })();
