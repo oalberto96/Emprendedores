@@ -33,6 +33,10 @@ function LoginService($http, $cookies, REST_SERVER) {
 		  	"password": contrasena
 		  },
 		  url: REST_SERVER + '/api/account/register/'
+		}).success(function(data, status, headers, config){
+			token = String('Token ') + data['token'];
+			$cookies.put('csrftoken', data['csrftoken'])
+			$cookies.put('sessionid', token );
 		});
 	}
 }

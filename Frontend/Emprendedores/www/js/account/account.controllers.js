@@ -29,7 +29,7 @@ function LoginCtrl($scope, $state, LoginService) {
 		.success(function(result){
 			$state.go("home.client");
 		}).error(function(result){
-			$scope.error = "Correo o contrasena no validos";
+			$scope.error = "Correo o contraseña no validos";
 		})
     }
 }
