@@ -28,6 +28,7 @@ function LoginCtrl($scope, $state, LoginService) {
 			$scope.data.password)
 		.success(function(result){
 			$state.go("home.client");
+			location.reload();
 		}).error(function(result){
 			$scope.error = "Correo o contraseña no validos";
 		})

@@ -25,6 +25,7 @@ function ProfileGetCtrl($scope, $stateParams, $ionicHistory, $state,  ProfileSer
 		ProfileService.logoutProfile()
 		.success(function(result){
 			$state.go('login');
+			location.reload();
 		});
 	} 
 	this.retrieveProfile();
