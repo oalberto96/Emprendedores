@@ -3919,9 +3919,9 @@ a.subdued {
     .bar.bar-stable.bar-footer {
       background-image: linear-gradient(180deg, #b2b2b2, #b2b2b2 50%, transparent 50%); }
   .bar.bar-positive {
-    border-color: #0c60ee;
-    background-color: #387ef5;
-    background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 50%);
+    border-color: #87B973;
+    background-color: #87B973;
+    background-image: linear-gradient(0deg, #87B973, #87B973 50%, transparent 50%);
     color: #fff; }
     .bar.bar-positive .title {
       color: #fff; }
@@ -4379,7 +4379,7 @@ a.subdued {
 
 .tabs-stable > .tabs,
 .tabs.tabs-stable {
-  border-color: #b2b2b2;
+  border-color: #87B973;
   background-color: #f8f8f8;
   background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
   color: #444; }
@@ -4390,9 +4390,9 @@ a.subdued {
 
 .tabs-positive > .tabs,
 .tabs.tabs-positive {
-  border-color: #0c60ee;
-  background-color: #387ef5;
-  background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 50%);
+  border-color: #87B973;
+  background-color: #87B973;
+  background-image: linear-gradient(0deg, #87B973, #87B973 50%, transparent 50%);
   color: #fff; }
   .tabs-positive > .tabs .tab-item .badge,
   .tabs.tabs-positive .tab-item .badge {
@@ -4518,7 +4518,7 @@ a.subdued {
   top: 4%; }
 
 .tabs-striped.tabs-positive .tabs {
-  background-color: #387ef5; }
+  background-color: #87B973; }
 
 .tabs-striped.tabs-positive .tab-item {
   color: rgba(255, 255, 255, 0.4);
@@ -8667,24 +8667,24 @@ progress {
         color: #fff; }
   .button.button-positive {
     border-color: transparent;
-    background-color: #387ef5;
+    background-color: #87B973;
     color: #fff; }
     .button.button-positive:hover {
       color: #fff;
       text-decoration: none; }
     .button.button-positive.active, .button.button-positive.activated {
-      border-color: #a2a2a2;
-      background-color: #0c60ee; }
+      border-color: #87B973;
+      background-color: #87B973; }
     .button.button-positive.button-clear {
       border-color: transparent;
       background: none;
       box-shadow: none;
-      color: #387ef5; }
+      color: #87B973; }
     .button.button-positive.button-icon {
       border-color: transparent;
       background: none; }
     .button.button-positive.button-outline {
-      border-color: #387ef5;
+      border-color: #87B973;
       background: transparent;
       color: #387ef5; }
       .button.button-positive.button-outline.active, .button.button-positive.button-outline.activated {
