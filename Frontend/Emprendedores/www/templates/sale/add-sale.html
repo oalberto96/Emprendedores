@@ -1,18 +1,17 @@
 <ion-view view-title="Venta">
 	<ion-content ng-controller="SaleAddCtrl as ctrl">
 		<div class="row">
-			<div class="col">Cantidad</div>
-			<div class="col">Producto</div>
-			<div class="col">Importe</div>
+			<div class="col" align = "center">Cantidad</div>
+			<div class="col" align = "center">Producto</div>
+			<div class="col" align = "center">Importe</div>
 		</div>
 		<hr/>
 		<div class="row" ng-repeat="product in ctrl.sale.products">
-			<div class="col" ng-bind="product.quantity"></div>
-			<div class="col" ng-bind="product.name_product"></div>
-			<div class="col" ng-bind="product.price"></div>
+			<div class="col" ng-bind="product.quantity" align = "center"></div>
+			<div class="col" ng-bind="product.name_product" align = "center"></div>
+			<div class="col" ng-bind="'$' + product.price  + 'MXN'" align = "center"></div>
 		</div>
 		<div class="list">
-
 			<label class="item item-input item-select">
 				<div class="input-label">
 					Cliente
