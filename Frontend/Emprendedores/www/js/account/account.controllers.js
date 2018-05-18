@@ -58,7 +58,7 @@ function RegisterCtrl($scope, $state , LoginService){
 	$scope.register = function () {
 		var error = false;
 		if (!validatePassword($scope.data.contrasena, $scope.data.confirmarContrasena)) {
-			$scope.passMessage = "No coindicen las contrasenas"
+			$scope.passMessage = "No coindicen las contraseñas"
 			error = true;
 		}
 		if (!error) {
@@ -70,6 +70,7 @@ function RegisterCtrl($scope, $state , LoginService){
 			)
 			.success(function(result){
 				$state.go("home.client");
+				location.reload();
 			})
 		}
 	}

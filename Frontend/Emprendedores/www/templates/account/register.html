@@ -11,16 +11,16 @@
               <input type="text" placeholder="Apellidos" ng-model="data.apellido">
             </label>
             <label class="item item-input">
-              <input type="email" name="email" placeholder="Correo electronico" ng-model="data.correo" >
+              <input type="email" name="email" placeholder="Correo electrónico" ng-model="data.correo" >
             </label>
-            <span ng-show="registerForm.email.$error.email">Ingrese un correo valido</span>
+            <span ng-show="registerForm.email.$error.email" class = "assertive">Ingrese un correo valido</span>
             <label class="item item-input">
               <input type="password" placeholder="Contraseña" ng-model="data.contrasena">
             </label>
             <label class="item item-input">
               <input type="password" placeholder="Confirmar Contraseña" ng-model="data.confirmarContrasena">
             </label>
-            <span ng-bind="passMessage"></span>
+            <span ng-bind="passMessage" class = "assertive"></span>
           </form>
           
         </div>

@@ -11,7 +11,7 @@
 				<a class="item item-avatar" ng-href="#/home/products/{{product.id}}"  on-long-press="ctrl.itemOnLongPress($index)">
 					<img src="img/product.png">
 					<h2 ng-bind="product.name_product" ></h2>
-					<p ng-bind="'$' + product.price"></p>
+					<p ng-bind="'$' + product.price +  ' MXN'"></p>
 				</a>
 			</div>
 			<button class="button button-block button-positive" ng-click="ctrl.go('home.addProduct')">

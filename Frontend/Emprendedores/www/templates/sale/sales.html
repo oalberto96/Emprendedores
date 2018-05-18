@@ -3,14 +3,14 @@
 		<div class="list list-inset">
 			<label class="item item-input">
 				<i class="icon ion-search placeholder-icon"></i>
-				<input type="text" ng-model = "busqueda" placeholder="Buscar venta">
+				<input type="text" ng-model = "busqueda" placeholder="Buscar Venta">
 			</label>
 		</div>
 		<div class="list" ng-repeat="sale in ctrl.sales | filter: busqueda">
 			<a class="item item-avatar" ng-href="#/home/sales/{{sale.id}}">
 				<img src="img/sales.png">
 				<h2 ng-bind="sale.client.first_name + ' ' + sale.client.last_name"></h2>
-				<h2 ng-bind="'Total: $' + sale.total"></h2>
+				<h2 ng-bind="'$' + sale.total + 'MXN'"></h2>
 				<p ng-bind="sale.date | date: 'short'"></p>
 			</a>
 		</div>
