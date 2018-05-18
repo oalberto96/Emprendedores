@@ -9,7 +9,7 @@
 		<div ng-controller="ClientListController as ctrl">
 			<div class="list" ng-repeat="client in ctrl.clients">
 				<a class="item item-avatar" ng-href="#/home/clients/{{client.id}}">
-					<!-- <img src="venkman.jpg"> -->
+					<img src="img/ionic.png">
 					<h2 ng-bind="client.first_name + ' ' + client.last_name" ></h2>
 					<p ng-bind="client.address"></p>
 				</a>

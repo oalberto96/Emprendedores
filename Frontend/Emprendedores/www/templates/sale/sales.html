@@ -8,7 +8,7 @@
 		</div>
 		<div class="list" ng-repeat="sale in ctrl.sales">
 			<a class="item item-avatar" ng-href="#/home/sales/{{sale.id}}">
-				<!-- <img src="venkman.jpg"> -->
+				<img src="img/ionic.png">
 				<h2 ng-bind="sale.client.first_name + ' ' + sale.client.last_name"></h2>
 				<h2 ng-bind="'Total: $' + sale.total"></h2>
 				<p ng-bind="sale.date | date: 'short'"></p>

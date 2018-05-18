@@ -17,6 +17,7 @@ function ProfileGetCtrl($scope, $stateParams, $ionicHistory, $state,  ProfileSer
 			ctrl.first_name = result.first_name;
 			ctrl.last_name = result.last_name;
 			ctrl.email = result.email;
+			ctrl.cambio = result.cambio;
 		});
 	}
 

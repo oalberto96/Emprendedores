@@ -10,6 +10,8 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+from business.models import Business
+
 from accounts.api.serializers import LoginUserSerializer, RegisterUserSerializer, ServiceUserSerializer, UserSerializer
 
 
@@ -60,11 +62,17 @@ class User(APIView):
 	serializer_class  = UserSerializer
 
 	def get(self,request):
+		#print(request.user)
+		business = Business.objects.filter(user=request.user)
 		response = {}
 		response ['username'] = request.user.username
 		response ['first_name'] = request.user.first_name
 		response ['last_name'] = request.user.last_name
 		response ['email'] = request.user.email
+		if len(business) > 0:
+			response ['cambio'] = business[0].name
+		else:
+			response ['cambio'] = ""
 		return Response(response, status=status.HTTP_200_OK)
 
 class Logout(APIView):
