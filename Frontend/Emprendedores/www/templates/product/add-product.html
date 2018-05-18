@@ -1,24 +1,24 @@
-<ion-view view-title="addProduct">
+<ion-view view-title="Agregar Producto">
 	<ion-content ng-controller="ProductAddCtrl as ctrl">
-		<div class="list" >
+		<div class="list">
 		  <label class="item item-input item-floating-label">
-		    <span class="input-label">Name product</span>
-		    <input type="text" placeholder="Name product" ng-model="ctrl.name_product">
+		    <span class="input-label">Nombre producto</span>
+		    <input type="text" placeholder="Nombre producto" ng-model="ctrl.name_product">
 		  </label>
 		  <label class="item item-input item-floating-label">
-		    <span class="input-label">Price</span>
-		    <input type="text" placeholder="Price" ng-model="ctrl.price">
+		    <span class="input-label">Precio</span>
+		    <input type="text" placeholder="Precio" ng-model="ctrl.price">
 		  </label>
 		  <label class="item item-input item-floating-label">
 		    <span class="input-label">SKU</span>
 		    <input type="text" placeholder="SKU" ng-model="ctrl.sku">
 		  </label>
 		  <label class="item item-input item-floating-label">
-		    <span class="input-label">Comment</span>
-		    <textarea rows="4" type="text" placeholder="Comment" ng-model="ctrl.comment"></textarea>
+		    <span class="input-label">Comentarios</span>
+		    <textarea rows="4" type="text" placeholder="Comentarios" ng-model="ctrl.comment"></textarea>
 		  </label>
 		  <button class="button button-block button-positive" ng-click="ctrl.submit_product()">
-	          Registrar Product
+	          Registrar Producto
 	      </button>
 		</div>
 	</ion-content>

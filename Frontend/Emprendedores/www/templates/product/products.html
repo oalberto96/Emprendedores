@@ -3,13 +3,13 @@
   			<div class="list list-inset">
 			<label class="item item-input">
 				<i class="icon ion-search placeholder-icon"></i>
-				<input type="text" ng-model = "busqueda" placeholder="Search">
+				<input type="text" ng-model = "busqueda" placeholder="Busca productos por SKU, Nombre, Precio">
 			</label>
 		</div>
 		<div ng-controller="ProductListCtrl as ctrl">
 			<div class="list" ng-repeat="product in ctrl.products | filter: busqueda">
 				<a class="item item-avatar" ng-href="#/home/products/{{product.id}}"  on-long-press="ctrl.itemOnLongPress($index)">
-					<img src="img/ionic.png">
+					<img src="img/product.png">
 					<h2 ng-bind="product.name_product" ></h2>
 					<p ng-bind="'$' + product.price"></p>
 				</a>
