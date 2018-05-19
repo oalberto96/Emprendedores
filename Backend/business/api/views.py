@@ -2,10 +2,12 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from business.models import Business
+from business.models import *
 
 from sales.models import Product, Sale, Client
 from sales.api.serializers import ProductSerializer
+from accounts.models import User
+from accounts.api.views import LoginUserAPI
 
 @api_view(['POST'])
 def business_register(request, pk=None):
@@ -60,3 +62,76 @@ def business_sale(request, business_url=None):
 			return Response(status=status.HTTP_401_UNAUTHORIZED)
 	else:
 		return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def business_client_register(request, business_url=None):
+	if request.method == "POST":
+		business_owner = Business.objects.filter(url=business_url)[0].user
+		if business_owner:
+			'''
+			if user exist
+				find if is a client
+				if is client
+					do nothing
+				else
+					make new client
+			if doesnt exist
+				create new user
+				asociate to a new client
+				return cookies
+			'''
+			users_query = User.objects.filter(username=request.data.get('email'))
+			if len(users_query) > 0:
+				user = users_query[0]
+				client_user_queryset = ClientUser.objects.filter(user=user)
+				if len(client_user_queryset) > 0:
+					for client_user in client_user_queryset:
+						if client_user.client.id_user == business_owner:
+							#Can't register, user already exist
+							return Response(status=status.HTTP_409_CONFLICT)
+				else:
+					client = Client(
+						id_user = business_owner,
+						first_name = request.data.get('first_name'),
+						last_name = request.data.get('last_name'),
+						email = request.data.get('email'),
+						phone_number = request.data.get('phone_number'),
+						address = request.data.get('address'),
+						rfc = request.data.get('rfc'),
+						notes = ""
+						)
+					client.save()
+					new_client_user = ClientUser(user=user, client=client)
+					new_client_user.save()
+					request.data['username'] = request.data.get('email')
+					logUser = LoginUserAPI()
+					return logUser.post(request)
+			else:
+				#Create a new user
+				user = User.objects.create_user(
+					username=request.data.get('email'),
+					password=request.data.get('password'),
+					email=request.data.get('email'),
+					first_name=request.data.get('first_name'),
+					last_name=request.data.get('last_name'))
+				client = Client(
+					id_user=business_owner,
+					first_name=request.data.get('first_name'),
+					last_name=request.data.get('last_name'),
+					email=request.data.get('email'),
+					phone_number=request.data.get('phone_number'),
+					address=request.data.get('address'),
+					rfc=request.data.get('rfc'),
+					notes="")
+				client.save()
+				# Asociate to a new client
+				request.data['username'] = request.data.get('email')
+				ClientUser.objects.create(user=user, client=client)
+				logUser = LoginUserAPI()
+				return logUser.post(request)
+		else:
+			return Response(status=status.HTTP_404_NOT_FOUND)
+
+		return Response(status=status.HTTP_200_OK)
+	else:
+		return Response(status=status.HTTP_401_UNAUTHORIZED)
