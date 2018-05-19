@@ -4,7 +4,6 @@
 	src: url("../lib/ionic/fonts/BershireSwash-Regular.ttf") format("truetype");
 }
 
-p{
+title{
 	font-family: Berkshire Swash, cursive;
-
 }

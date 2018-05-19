@@ -1,11 +1,19 @@
 <ion-view view-title="Venta">
-	<ion-content ng-controller="SaleGetCtrl as ctrl">
+	<ion-content ng-controller="SaleGetCtrl as ctrl">	
 		<div class="row">
-			<div class="col" align = "center">Cantidad</div>
-			<div class="col" align = "center">Producto</div>
-			<div class="col" align = "center">Importe</div>
+			<div class="col" align = "center">
+				Cantidad
+				<hr style="border-color: #87B973;">
+			</div>
+			<div class="col" align = "center">
+				Producto
+				<hr style="border-color: #87B973;">
+			</div>
+			<div class="col" align = "center">
+				Importe
+				<hr style="border-color: #87B973;">
+			</div>
 		</div>
-		<br/>
 		<div class="row" ng-repeat="product in ctrl.sale.products">
 			<div class="col" ng-bind="product.quantity" align = "center"></div>
 			<div class="col" ng-bind="product.name_product" align = "center"></div>
@@ -16,10 +24,26 @@
 		  		<span class="input-label">Cliente: </span>
 		  		<input type="text" placeholder="Cliente: " ng-model="ctrl.sale.client.first_name">
 			</label>
-			<label class="item item-input item-floating-label">
-		  		<span class="input-label">Total: </span>
-		  		<input type="text" placeholder="Total: " ng-model="ctrl.sale.total">
-			</label>
+		<div class="card">
+  			<div class="item item-divider">
+    			<div align = "center">Total</div>
+  			</div>			
+  			<div class="item item-text-wrap" ng-repeat="product in ctrl.sale.products">
+  				<div class ="row">
+  					<div class="col" align = "center"><img src="img/sales.png"></div>
+  				</div>
+  				<div class="row">
+  					<div class="col" align = "center">
+  						<div ng-bind="'$' + product.price  + 'MXN'" align = "center"></div>
+  					</div>
+  				</div>
+  			</div>
+  			<div class="item item-divider" align="center">
+  				<div class="row">
+					<div class="col" align="right"><img src="img/dinero.png"></div>
+					<div class="col" align="left"></br><h2>Efectivo</h2></div>
+				</div>
+			</div>				
 
 			<button class="button button-block button-positive">
 	          	Recibo

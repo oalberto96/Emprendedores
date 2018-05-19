@@ -1,9 +1,18 @@
 <ion-view view-title="Venta">
 	<ion-content ng-controller="SaleAddCtrl as ctrl">
 		<div class="row">
-			<div class="col" align = "center">Cantidad</div>
-			<div class="col" align = "center">Producto</div>
-			<div class="col" align = "center">Importe</div>
+			<div class="col" align = "center">
+				Cantidad
+				<hr style="border-color: #87B973;">
+			</div>
+			<div class="col" align = "center">
+				Producto
+				<hr style="border-color: #87B973;">
+			</div>
+			<div class="col" align = "center">
+				Importe
+				<hr style="border-color: #87B973;">
+			</div>
 		</div>
 		<hr/>
 		<div class="row" ng-repeat="product in ctrl.sale.products">
