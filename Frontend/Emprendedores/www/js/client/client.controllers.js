@@ -7,7 +7,7 @@ app.controller('ClientListController', ClientListController);
 ClientListController.$inject = ['$scope','$state','ClientService'];
 
 function ClientListController($scope,$state, ClientService){
-
+	
 	clientList = this;
 
 	clientList.go = function(path){

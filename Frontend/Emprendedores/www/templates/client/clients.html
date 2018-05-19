@@ -1,17 +1,18 @@
-1<ion-view view-title="clients">
+<ion-view view-title="Clientes">
+
 	<ion-content class="padding">
 		<div class="list list-inset">
 			<label class="item item-input">
 				<i class="icon ion-search placeholder-icon"></i>
-				<input type="text" placeholder="Search">
+				<input type="text" ng-model = "busqueda" placeholder="Busca un cliente por nombre">
 			</label>
 		</div>
 		<div ng-controller="ClientListController as ctrl">
-			<div class="list" ng-repeat="client in ctrl.clients">
+			<div class="list" ng-repeat="client in ctrl.clients | filter: busqueda">
 				<a class="item item-avatar" ng-href="#/home/clients/{{client.id}}">
-					<!-- <img src="venkman.jpg"> -->
+					<img src="img/clients.png">
 					<h2 ng-bind="client.first_name + ' ' + client.last_name" ></h2>
-					<p ng-bind="client.address"></p>
+					<p ng-bind="client.phone_number"></p>
 				</a>
 			</div>
 			<button class="button button-block button-positive" ng-click="ctrl.go('home.addClient')">

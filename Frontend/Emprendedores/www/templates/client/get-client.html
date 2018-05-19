@@ -1,33 +1,33 @@
-<ion-view view-title="addClient">
+<ion-view view-title="Cliente">
 	<ion-content ng-controller="ClientGetCtrl as ctrl">
 		<div class="list" >
 		  <label class="item item-input item-floating-label">
-		    <span class="input-label">First name</span>
-		    <input type="text" placeholder="First Name" ng-model="ctrl.first_name">
+		    <span class="input-label">Nombre(s)</span>
+		    <input type="text" placeholder="Nombre(s)" ng-model="ctrl.first_name">
 		  </label>
 		  <label class="item item-input item-floating-label">
-		    <span class="input-label">Last Name</span>
-		    <input type="text" placeholder="Last Name" ng-model="ctrl.last_name">
+		    <span class="input-label">Apellido(s)</span>
+		    <input type="text" placeholder="Apellido(s)" ng-model="ctrl.last_name">
 		  </label>
 		  <label class="item item-input item-floating-label">
-		    <span class="input-label">Email</span>
-		    <input type="text" placeholder="Email" ng-model="ctrl.email">
+		    <span class="input-label">E-mail</span>
+		    <input type="text" placeholder="E-mail" ng-model="ctrl.email">
 		  </label>
 		  <label class="item item-input item-floating-label">
-		    <span class="input-label">Phone number</span>
-		    <input type="text" placeholder="Phone Number" ng-model="ctrl.phone_number">
+		    <span class="input-label">Teléfono</span>
+		    <input type="text" placeholder="Teléfono" ng-model="ctrl.phone_number">
 		  </label>
 		  <label class="item item-input item-floating-label">
-		    <span class="input-label">Address</span>
-		    <input type="text" placeholder="Address" ng-model="ctrl.address">
+		    <span class="input-label">Dirección</span>
+		    <input type="text" placeholder="Dirección" ng-model="ctrl.address">
 		  </label>
 		  <label class="item item-input item-floating-label">
 		    <span class="input-label">RFC</span>
 		    <input type="text" placeholder="RFC" ng-model="ctrl.rfc">
 		  </label>
 		  <label class="item item-input item-floating-label">
-		    <span class="input-label">Notes</span>
-		    <textarea rows="4" type="text" placeholder="Notes" ng-model="ctrl.notes"></textarea>
+		    <span class="input-label">Notas</span>
+		    <textarea rows="4" type="text" placeholder="Notas" ng-model="ctrl.notes"></textarea>
 		  </label>
 		  <button class="button button-block button-positive" ng-click="ctrl.updateClient()">
 	          Actualizar cliente

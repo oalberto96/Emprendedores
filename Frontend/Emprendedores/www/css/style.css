@@ -1,1 +1,9 @@
 /* Empty. Add your own CSS if you like */
+@font-face{
+	font-family: 'Berkshire Swash', cursive;
+	src: url("../lib/ionic/fonts/BershireSwash-Regular.ttf") format("truetype");
+}
+
+title{
+	font-family: Berkshire Swash, cursive;
+}
