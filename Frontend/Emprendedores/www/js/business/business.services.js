@@ -22,15 +22,26 @@ function BusinessService($http, REST_SERVER, $cookies){
 	}
 
 	service.userRegister = function (user, business){
-		console.log(business);
 		return $http({
 		  method: 'POST',
 		  data: user,
 		  url: REST_SERVER +'/api/business/'+ business.toString() +'/client'
 		}).success(function(data, status, headers, config){
-			// token = String('Token ') + data['token'];
-			// $cookies.put('csrftoken', data['csrftoken'])
-			// $cookies.put('sessionid', token );
+			token = String('Token ') + data['token'];
+			$cookies.put('csrftoken', data['csrftoken'])
+			$cookies.put('sessionid', token );
+		});
+	}
+
+	service.userLogin = function (user, business){
+		return $http({
+		  method: 'POST',
+		  data: user,
+		  url: REST_SERVER +'/api/business/'+ business.toString() +'/login'
+		}).success(function(data, status, headers, config){
+			token = String('Token ') + data['token'];
+			$cookies.put('csrftoken', data['csrftoken'])
+			$cookies.put('sessionid', token );
 		});
 	}
 }

@@ -135,3 +135,18 @@ def business_client_register(request, business_url=None):
 		return Response(status=status.HTTP_200_OK)
 	else:
 		return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+@api_view(['POST'])
+def business_client_login(request, business_url=None):
+	if request.method == "POST":
+		user = User.objects.filter(username=request.data.get('username')).first()
+		business = Business.objects.filter(url=business_url).first()
+		if user and business:
+			business_owner = business.user
+			client_user_query = ClientUser.objects.filter(user=user)
+			for client_user in client_user_query:
+				if client_user.client.id_user == business_owner:
+					logUser = LoginUserAPI()
+					return logUser.post(request)
+		return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+	return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)

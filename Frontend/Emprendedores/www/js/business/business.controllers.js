@@ -3,11 +3,15 @@
   var app = angular.module('emprendedores');
 
   app.controller('BusinessCtrl', BusinessCtrl);
-  BusinessCtrl.$inject = ['$scope'];
+  BusinessCtrl.$inject = ['$scope','$state', '$stateParams'];
 
-  function BusinessCtrl($scope) {
+  function BusinessCtrl($scope, $state, $stateParams) {
     $scope.go = function (path) {
-      $state.go(path)
+      $state.go(path);
+    }
+
+    $scope.goInsideBusiness = function(path){
+      $state.go(path, {'business': $stateParams.business});
     }
   }
 
@@ -130,19 +134,36 @@
   }
 
   app.controller('BClientRegisterCtrl', BClientRegisterCtrl);
-  BClientRegisterCtrl.$inject = ['$scope', '$cookies', '$stateParams', '$state', '$window','BusinessService'];
+  BClientRegisterCtrl.$inject = ['$scope', '$cookies', '$stateParams', '$window','BusinessService'];
 
-  function BClientRegisterCtrl($scope, $cookies, $stateParams, $state, $window, BusinessService) {
+  function BClientRegisterCtrl($scope, $cookies, $stateParams, $window, BusinessService) {
     $scope.data = {};
+
     $scope.register = function () {
       BusinessService.userRegister($scope.data, $stateParams.business)
         .success(function (data, status, headers, config) {
-          console.log("Registro");
-          token = String('Token ') + data['token'];
-          $cookies.put('csrftoken', data['csrftoken']);
-          $cookies.put('sessionid', token);
-          $state.go('business-home', {'business': $stateParams.business})
+          $scope.goInsideBusiness('business-home');
           location.reload();
+        });
+    }
+  }
+
+  app.controller('BClientLoginCtrl', BClientLoginCtrl);
+  BClientLoginCtrl.$inject = ['$scope', '$cookies', '$stateParams', '$state', '$window','BusinessService'];
+
+  function BClientLoginCtrl($scope, $cookies, $stateParams, $state, $window, BusinessService) {
+    $scope.data = {};
+
+    $scope.login = function () {
+      BusinessService.userLogin($scope.data, $stateParams.business)
+        .success(function (data, status, headers, config) {
+          $scope.goInsideBusiness('business-home');
+          location.reload();
+        })
+        .catch(function(error){
+          if(error.status == 406){
+            $scope.error = "Contrasena o correo no valido"
+          }
         });
     }
   }
