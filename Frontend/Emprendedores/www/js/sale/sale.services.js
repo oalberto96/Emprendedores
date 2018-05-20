@@ -56,6 +56,10 @@
 			return sale;
 		}
 
+		service.getProducts = function(){
+			return sale.products;
+		}
+
 		service.proceedSale = function(total, businessUrl){
 			var products = []
 			//Send only product's id
@@ -82,7 +86,7 @@
 				url: REST_SERVER + '/api/business/' + businessUrl.toString() + '/sale'
 			}).then(function(result){
 				sales.push(result.data);
-				//saleInit();
+				saleInit();
 			});
 		}
 

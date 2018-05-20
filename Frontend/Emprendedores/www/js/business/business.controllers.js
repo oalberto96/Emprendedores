@@ -113,17 +113,24 @@
         ctrl.business.name = result.data.name;
       })
 
-
     ctrl.proceed = function () {
-      SaleService.proceedSale(ctrl.total(), ctrl.business_url)
+      if (ctrl.sale.products.length > 0) {
+        SaleService.proceedSale(ctrl.total(), ctrl.business_url)
         .then(function (result) {
-          //$scope.goInsideBusiness('business-home');
-          //location.reload();
+          $scope.goInsideBusiness('business-home');
+          location.reload();
         });
+      } else {
+        ctrl.error = "Agregue productos";
+      }
+      
     }
 
     ctrl.total = function () {
       var total = 0;
+      if (ctrl.sale.products.length > 0 ) {
+        ctrl.error = "";
+      }
       ctrl.sale.products.forEach(function (item) {
         total += item.price * item.quantity;
       })

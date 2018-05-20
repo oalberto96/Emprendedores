@@ -35,18 +35,30 @@
 		var ctrl = this;
 		ctrl.sale = SaleService.getSale();
 		ctrl.clients = ClientService.getClients();
-
+		var error = "";
 		ctrl.submit = function(){
-			SaleService.createSale(ctrl.clientSelected, ctrl.total())
-			.then(function(result){
-				ctrl.sale = SaleService.getSale();
-				ctrl.total();
-				$state.go($ionicHistory.backView().stateName);
-			});
+			if (ctrl.sale.products.length > 0) {
+				if (ctrl.clientSelected == undefined) {
+					error = "Selecciona un cliente";
+				} else {
+					SaleService.createSale(ctrl.clientSelected, ctrl.total())
+					.then(function(result){
+						ctrl.sale = SaleService.getSale();
+						ctrl.total();
+						$state.go($ionicHistory.backView().stateName);
+					});
+				}
+			} else {
+				error = "Agregue productos ";
+			}
 		}
 
 		ctrl.total = function(){
 			var total = 0;
+			if (ctrl.sale.products.length > 0 && ctrl.clientSelected != undefined) {
+				error = "";
+			}
+			ctrl.error = error;
 			ctrl.sale.products.forEach(function(item){
 				total += item.price * item.quantity;
 			})
