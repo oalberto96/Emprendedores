@@ -164,7 +164,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   .state('business-shopping', {
     url: "/:business/shopping-cart",
     templateUrl: "templates/business/business-shopping.html",
-    controller: "ShoppingCartCtrl"
+    controller: "BusinessCtrl"
   })
 
   .state('business-client-register', {

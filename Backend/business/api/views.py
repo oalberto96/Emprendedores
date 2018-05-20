@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 
 from business.models import *
 
-from sales.models import Product, Sale, Client
+from sales.models import Product, Sale, Client, SaleProduct
 from sales.api.serializers import ProductSerializer
 from accounts.models import User
 from accounts.api.views import LoginUserAPI
@@ -45,11 +45,18 @@ def business_get_products(request, business_url=None):
 def business_sale(request, business_url=None):
 	if request.method == "POST":
 		if not request.user.is_anonymous:
-			business = Business.objects.filter(url=business_url)
-			business_owner = business[0].user
+			business = Business.objects.filter(url=business_url).first()
+			if not business:
+				return Response(status=status.HTTP_400_BAD_REQUEST)
+			business_owner = business.user
+			user = User.objects.get(id=request.user.id)
+			client_user_query = ClientUser.objects.filter(user=user)
+			for client_user in client_user_query:
+				if client_user.client.id_user == business_owner:
+					client = client_user.client
 			sale = Sale()
 			sale.id_user = business_owner
-			sale.id_client = Client.objects.filter(id=1)[0] # TODO
+			sale.id_client = client
 			sale.date = request.data.get('date')
 			sale.discount = request.data.get('discount')
 			sale.subtotal = request.data.get('subtotal')
@@ -57,6 +64,13 @@ def business_sale(request, business_url=None):
 			sale.total = request.data.get('total')
 			sale.finished = request.data.get('finished')
 			sale.save()
+			products = request.data.get('products')
+			for product_request in products:
+				product = Product.objects.get(id=product_request.get('id_product'))
+				SaleProduct.objects.create(
+					id_sale=sale,
+					product=product,
+					quantity=product_request.get('quantity'))
 			return Response(status=status.HTTP_200_OK)
 		else:
 			return Response(status=status.HTTP_401_UNAUTHORIZED)

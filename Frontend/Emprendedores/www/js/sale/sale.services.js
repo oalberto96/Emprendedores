@@ -82,7 +82,7 @@
 				url: REST_SERVER + '/api/business/' + businessUrl.toString() + '/sale'
 			}).then(function(result){
 				sales.push(result.data);
-				saleInit();
+				//saleInit();
 			});
 		}
 
