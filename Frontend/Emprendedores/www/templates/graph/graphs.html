@@ -1,10 +1,22 @@
 <ion-view view-title="Venmin">
-	<ion-content class="padding">
-		<div class="list list-inset" align = "center">
-			<img src="img/perfil2.png" style="width: 100px; height: 100px;">
+	<ion-content>
+		<div class="row">
+			<div class="col" align = "center" ng-click="go('home.sale');">
+				Estadísticas
+				<hr style="border-color: #87B973;">
+			</div>
+			<div class="col" align = "center" ng-click="go('home.reports');">
+				Reportes
+			</div>
+		</div>		
+		<div class="row">
+			<div class="col" align = "right">
+				<img src = "img/calendar.png" align="center">
+			</div>
+			<div class="col" align = "left">
+				<p align="center">Hoy, es 19 may.</p>
+			</div>
 		</div>
-		<div class="list" align="center">
-			<h2>Proximamente</h2>										
-		</div>	
+
 	</ion-content>
 </ion-view>

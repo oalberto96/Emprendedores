@@ -82,6 +82,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     }
   })
 
+  .state('home.reports', {
+    url: '/sales',
+    views: {
+      'sales': {
+        templateUrl: 'templates/sale/reports.html',
+        controller: 'SalesCtrl'
+      }
+    }
+  })  
+
   .state('home.addSale', {
     url: '/sales/add',
     views: {
