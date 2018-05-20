@@ -21,12 +21,14 @@
 		}
 	}
 
+
 	app.controller('SaleListCtrl', SaleListCtrl);
 	SaleListCtrl.$inject = ['SaleService'];
 	function SaleListCtrl(SaleService){
 		var ctrl = this;
 		SaleService.retrieveSales();
 		ctrl.sales = SaleService.getSales();
+
 	}
 
 	app.controller('SaleAddCtrl', SaleAddCtrl);
@@ -45,13 +47,26 @@
 					.then(function(result){
 						ctrl.sale = SaleService.getSale();
 						ctrl.total();
-						$state.go($ionicHistory.backView().stateName);
+						$ionicHistory.nextViewOptions({
+							historyRoot: true
+
+						});
+						$state.go('home.thanksSale');
 					});
 				}
 			} else {
 				error = "Agregue productos ";
 			}
 		}
+
+		ctrl.dirigir = function(){
+			$ionicHistory.nextViewOptions({
+				historyRoot: true
+
+			});			
+			$state.go('home.sale');
+		}
+		
 
 		ctrl.total = function(){
 			var total = 0;
