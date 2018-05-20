@@ -38,6 +38,14 @@ function ProfileGetCtrl($scope, $stateParams, $ionicHistory, $state,  ProfileSer
 		});
 	}
 
+	this.about = function(){
+		$state.go('home.about');
+	}
+
+	this.help = function(){
+		$state.go('home.help');
+	}	
+
 	this.retrieveProfile();
 
 }

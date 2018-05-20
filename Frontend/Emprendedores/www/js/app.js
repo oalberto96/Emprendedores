@@ -228,6 +228,26 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     }
   })
 
+  .state('home.about', {
+    url: '/about',
+    views: {
+      'profile': {
+        templateUrl: 'templates/profile/about.html',
+        controller: 'ProfileGetCtrl'
+      }
+    }
+  })
+
+  .state('home.help', {
+    url: '/help',
+    views: {
+      'profile': {
+        templateUrl: 'templates/profile/help.html',
+        controller: 'ProfileGetCtrl'
+      }
+    }
+  })      
+
   $urlRouterProvider.otherwise('/login');
 
 })
