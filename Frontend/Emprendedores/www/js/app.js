@@ -32,6 +32,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     templateUrl: "templates/home.html",
   })
 
+  .state('home.graph',{
+    url: '/graph',
+    views: {
+      'graph': {
+        templateUrl: 'templates/graph/graphs.html',
+        //controller: 'GraphGetCtrl'
+      }
+    }
+  })  
+
   .state('home.client', {
     url: '/clients',
     views: {
