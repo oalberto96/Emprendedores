@@ -42,6 +42,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     }
   })  
 
+  .state('home.reports',{
+    url: '/reports',
+    views: {
+      'graph': {
+        templateUrl: 'templates/graph/reports.html',
+        //controller: 'GraphGetCtrl'
+      }
+    }
+  })    
+
   .state('home.client', {
     url: '/clients',
     views: {
@@ -81,17 +91,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       }
     }
   })
-
-  .state('home.reports', {
-    url: '/sales',
-    views: {
-      'sales': {
-        templateUrl: 'templates/sale/reports.html',
-        controller: 'SalesCtrl'
-      }
-    }
-  })  
-
+ 
   .state('home.addSale', {
     url: '/sales/add',
     views: {

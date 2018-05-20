@@ -3,9 +3,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-
+from rest_framework.views import APIView
+from django.db.models import Sum
 from django.contrib.auth.models import User
-
+from django.utils.timezone import datetime #important if using timezones
 from sales.api.serializers import ClientSerializer, ProductSerializer, SaleSerializer
 from sales.models import Client, Product, Sale
 
@@ -86,7 +87,6 @@ class ProductViewSet(viewsets.ViewSet):
 		serializer = ProductSerializer(queryset, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
-
 class SaleViewSet(viewsets.ViewSet):
 	permission_classes = [permissions.IsAuthenticated]
 	serializer_class = SaleSerializer
@@ -106,6 +106,28 @@ class SaleViewSet(viewsets.ViewSet):
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 	def list(self, request):
-		queryset = Sale.rel_objects.with_products(sale_owner=request.user.id)
+		queryset = Sale.rel_objects.with_products(sale_owner=request.user.id).order_by('-date')
 		serializer = SaleSerializer(queryset, many=True)
-		return Response(serializer.data, status=status.HTTP_200_OK)
+		return Response(serializer.data, status=status.HTTP_200_OK)	
+
+class SaleReportViewSet(APIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = SaleSerializer
+
+
+	def get(self, request):
+		queryset = Sale.rel_objects.with_products(sale_owner=request.user.id).order_by('-date').filter(date__month = '05')
+		print(queryset)
+		cant = queryset.count()
+		print(cant)
+		suma = queryset.aggregate(Sum("total"))
+		total= (suma.get("total__sum"))		
+		response = {}
+		response['cant'] = cant
+		response['total'] = total
+		print(response)
+		return Response(response, status=status.HTTP_200_OK)		
+	
+
+
+			

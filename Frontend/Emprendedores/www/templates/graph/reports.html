@@ -1,0 +1,29 @@
+<ion-view view-title="Reportes">
+	<ion-content ng-controller="ReportGetCtrl as ctrl">
+		<div class="row">
+			<div class="col" align = "center" ng-click="ctrl.go('home.graph');">
+				Estadísticas
+			</div>
+			<div class="col" align = "center">
+				Reportes
+				<hr style="border-color: #87B973;">
+			</div>
+		</div>
+		<div class="card">
+  			<div class="item item-divider">
+    			<div align = "left">2018</div>
+  			</div>			
+  			<div class="item item-text-wrap">
+  				<div class="row">
+  					<div class = "col">
+  						<h2>mayo</h2>
+  						<div ng-bind = "ctrl.cant + ' ' + 'ventas'"></div>
+  					</div>
+  					<div class="col" align = "right">
+  						<div ng-bind="'$' + ctrl.total + ' ' + 'MXN'" align = "right"></div>
+  					</div>
+  				</div>
+  			</div>
+		</div>
+	</ion-content>
+</ion-view>

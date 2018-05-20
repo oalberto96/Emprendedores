@@ -1,11 +1,11 @@
 <ion-view view-title="Venmin">
-	<ion-content>
+	<ion-content ng-controller="HomeListCtrl as ctrl">
 		<div class="row">
-			<div class="col" align = "center" ng-click="go('home.sale');">
+			<div class="col" align = "center">
 				Estadísticas
 				<hr style="border-color: #87B973;">
 			</div>
-			<div class="col" align = "center" ng-click="go('home.reports');">
+			<div class="col" align = "center" ng-click="ctrl.go('home.reports');">
 				Reportes
 			</div>
 		</div>		

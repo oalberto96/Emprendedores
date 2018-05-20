@@ -23,8 +23,7 @@ class SaleSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Sale
-		fields = ['id','id_user', 'id_client', 'client', 'date', 'products',
-		'discount', 'subtotal', 'pay_type', 'total', 'finished']
+		fields = ['id','id_user', 'id_client', 'client', 'date', 'products','discount', 'subtotal', 'pay_type', 'total', 'finished']
 
 	def get_client(self, obj):
 		client = obj.id_client

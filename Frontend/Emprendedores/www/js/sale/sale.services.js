@@ -131,6 +131,7 @@
 			});
 		}
 
+
 		service.retrieveSale = function(saleId){
 			return $http({
 				method: 'GET',

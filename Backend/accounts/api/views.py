@@ -64,6 +64,7 @@ class User(APIView):
 	def get(self,request):
 		#print(request.user)
 		business = Business.objects.filter(user=request.user)
+		print(business)
 		response = {}
 		response ['username'] = request.user.username
 		response ['first_name'] = request.user.first_name
