@@ -19,6 +19,10 @@
     		<i class="icon ion-email"></i>
     			<h2 ng-bind="ctrl.email" ></h2>
   		</a>
+      <a class = "item item-icon-left" ng-click="ctrl.checkService()">
+        <i class="icon ion-archive"></i>
+          Mas servicios
+      </a>
   		<a class="item item-icon-left" href="#">
    	 		<i class="icon ion-clipboard"></i>
     			Acerca de
@@ -29,9 +33,6 @@
     			Ayuda
   		</a>
 	</div>
-  <button class="button button-light" ng-click="ctrl.checkService()">
-      Mas servicios
-  </button>
 	<button class="button button-block button-assertive" ng-click="ctrl.logout()">
 	    Logout
 	</button>
