@@ -21,12 +21,14 @@
 		}
 	}
 
+
 	app.controller('SaleListCtrl', SaleListCtrl);
 	SaleListCtrl.$inject = ['SaleService'];
 	function SaleListCtrl(SaleService){
 		var ctrl = this;
 		SaleService.retrieveSales();
 		ctrl.sales = SaleService.getSales();
+
 	}
 
 	app.controller('SaleAddCtrl', SaleAddCtrl);
@@ -36,12 +38,27 @@
 		ctrl.sale = SaleService.getSale();
 		ctrl.clients = ClientService.getClients();
 
+		ctrl.dirigir = function(){
+			$ionicHistory.nextViewOptions({
+      			historyRoot: true
+
+    		});			
+			$state.go('home.sale');
+		}	
+
 		ctrl.submit = function(){
 			SaleService.createSale(ctrl.clientSelected, ctrl.total())
 			.then(function(result){
 				ctrl.sale = SaleService.getSale();
 				ctrl.total();
-				$state.go($ionicHistory.backView().stateName);
+				$ionicHistory.nextViewOptions({
+      				historyRoot: true
+
+    			});
+				//stateName = "home.thanksSale";
+				$state.go('home.thanksSale');
+				//$state.go($ionicHistory.backView().stateName);
+
 			});
 		}
 

@@ -92,6 +92,21 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     }
   })
 
+
+  .state('home.thanksSale', {
+    url: '/sales/thanks',
+    views: {
+      'sales':{
+        templateUrl: 'templates/sale/gracias.html',
+        controller: 'SalesCtrl'
+      }
+    }
+  })
+
+
+
+
+
   .state('home.product', {
     url: '/products',
     views: {
