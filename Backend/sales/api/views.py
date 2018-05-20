@@ -126,7 +126,28 @@ class SaleReportViewSet(APIView):
 		response['cant'] = cant
 		response['total'] = total
 		print(response)
-		return Response(response, status=status.HTTP_200_OK)		
+		return Response(response, status=status.HTTP_200_OK)
+
+class DataViewSet(APIView):
+	permission_classes = [permissions.IsAuthenticated]
+	serializer_class = SaleSerializer
+
+
+	def get(self, request):
+		queryset = Sale.rel_objects.with_products(sale_owner=request.user.id)
+		queryset2 = Client.objects.filter(id_user=request.user.id)
+		queryset3 = Product.objects.filter(id_user=request.user.id)
+		#queryset3 = Product.objects.filter(user = request.user)
+		suma = queryset.aggregate(Sum("total"))
+		total_ventas = (suma.get("total__sum"))
+		total_clientes = queryset2.count()
+		total_productos = queryset3.count()		
+		response = {}
+		response['ventas'] = total_ventas
+		response['productos'] = total_productos
+		response['clientes'] = total_clientes
+		print(response)
+		return Response(response, status=status.HTTP_200_OK)	
 	
 
 

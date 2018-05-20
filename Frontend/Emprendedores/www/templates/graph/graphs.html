@@ -1,5 +1,5 @@
 <ion-view view-title="Venmin">
-	<ion-content ng-controller="ExampleController">
+	<ion-content ng-controller="HomeListCtrl as ctrl">
 		<div class="row">
 			<div class="col" align = "center">
 				Estadísticas
@@ -9,32 +9,31 @@
 				Reportes
 			</div>
 		</div>		
-		<div class="row" align = "center">
+		<div class="row">
+			<div class="col col-10" align = "center"></div>
 			<div class="col" align = "right">
-				<img src = "img/calendar.png" align="center">
+				<img src = "img/calendar.png" align="right">
 			</div>
 			<div class="col" align = "left">
-				<h3 align="center">Hoy, es 19 may.</h3>
+				<h5 align="left">Hoy, es 19 may.</h5>
 			</div>
+			<div class="col col-2" align = "right"></div>
 		</div>
-    	<div class="card">
+    	<div class="card" ng-controller="GraphChartController">
+        	<div class="item item-text-wrap">
+				<canvas id="base" class="chart-horizontal-bar" chart-data="data" chart-labels="labels" ></canvas> 
+        	</div>
+    	</div>		
+    	<div class="card" ng-controller="GraphLineController">
         	<div class="item item-divider">
-            	A line chart
+            	Ventas del Mes
         	</div>
         	<div class="item item-text-wrap">
 				<canvas id="line" class="chart chart-line" chart-data="data"
 				chart-labels="labels" chart-series="series" chart-options="options"
 				chart-dataset-override="datasetOverride" chart-click="onClick">
-				</canvas
+				</canvas>
         	</div>
-    	</div>		
-    	<!--<div class="card">
-        	<div class="item item-divider">
-            	A bar chart
-        	</div>
-        	<div class="item item-text-wrap">
-				<canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels"></canvas> 
-        	</div>
-    	</div>-->    	
+    	</div>	   	
 	</ion-content>
 </ion-view>
