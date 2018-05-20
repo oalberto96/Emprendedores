@@ -117,10 +117,8 @@
     ctrl.proceed = function () {
       SaleService.proceedSale(ctrl.total(), ctrl.business_url)
         .then(function (result) {
-          console.log(result);
-          // ctrl.sale = SaleService.getSale();
-          // ctrl.total();
-          // $state.go($ionicHistory.backView().stateName);
+          //$scope.goInsideBusiness('business-home');
+          //location.reload();
         });
     }
 
