@@ -79,7 +79,6 @@
 					"total": 	total,
 					"finished": sale.finished
 				}
-			console.log(data);
 			return $http({
 				method: 'POST',
 				data: data,

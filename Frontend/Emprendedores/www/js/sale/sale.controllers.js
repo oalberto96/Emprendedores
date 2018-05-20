@@ -11,15 +11,6 @@
 			$state.go(path);
 		}
 
-		$scope.checkService = function(){
-			AccountService.checkUserServices()
-			.then(function(result){
-				if (result.status == 204) {
-					$state.go('services');
-				}
-			});
-		}
-
 		$scope.dirigir = function(){
 			$ionicHistory.nextViewOptions({
 				historyRoot: true
