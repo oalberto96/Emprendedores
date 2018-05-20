@@ -5,9 +5,9 @@ var app = angular.module('emprendedores');
 
 
 app.controller('ProfileGetCtrl', ProfileGetCtrl);
-ProfileGetCtrl.$inject = ['$scope', '$stateParams','$ionicHistory', '$state',  'ProfileService'];
+ProfileGetCtrl.$inject = ['$scope', '$stateParams','$ionicHistory', '$state',  'ProfileService', 'AccountService'];
 
-function ProfileGetCtrl($scope, $stateParams, $ionicHistory, $state,  ProfileService){
+function ProfileGetCtrl($scope, $stateParams, $ionicHistory, $state,  ProfileService, AccountService){
 	ctrl = this;
 
 	this.retrieveProfile = function () {
@@ -22,13 +22,23 @@ function ProfileGetCtrl($scope, $stateParams, $ionicHistory, $state,  ProfileSer
 	}
 
 	this.logout = function(){
-		
 		ProfileService.logoutProfile()
 		.success(function(result){
 			$state.go('login');
 			location.reload();
 		});
-	} 
+	}
+
+	this.checkService = function(){
+		AccountService.checkUserServices()
+		.then(function(result){
+			if (result.status == 204) {
+				$state.go('services');
+			}
+		});
+	}
+
 	this.retrieveProfile();
+
 }
 })();

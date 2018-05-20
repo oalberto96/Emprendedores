@@ -4,20 +4,18 @@
 	//Cambiar esto a perfil
 	app.controller('SalesCtrl', SalesCtrl);
 
-	SalesCtrl.$inject = ['$scope','$state', 'AccountService'];
+	SalesCtrl.$inject = ['$scope','$state','$ionicHistory','AccountService'];
 
-	function SalesCtrl($scope, $state, AccountService){
+	function SalesCtrl($scope, $state, $ionicHistory, AccountService){
 		$scope.go = function(path){
 			$state.go(path);
 		}
 
-		$scope.checkService = function(){
-			AccountService.checkUserServices()
-			.then(function(result){
-				if (result.status == 204) {
-					$state.go('services');
-				}
-			});
+		$scope.dirigir = function(){
+			$ionicHistory.nextViewOptions({
+				historyRoot: true
+			});			
+			$state.go('home.sale');
 		}
 	}
 
@@ -58,15 +56,6 @@
 				error = "Agregue productos ";
 			}
 		}
-
-		ctrl.dirigir = function(){
-			$ionicHistory.nextViewOptions({
-				historyRoot: true
-
-			});			
-			$state.go('home.sale');
-		}
-		
 
 		ctrl.total = function(){
 			var total = 0;

@@ -26,6 +26,18 @@ app.run(function($ionicPlatform, $http, $cookies) {
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+  .state('login', {
+    url: "/login",
+    templateUrl: "templates/account/login.html",
+    controller: 'LoginCtrl'
+  })
+
+  .state('register', {
+    url: "/register",
+    templateUrl: "templates/account/register.html",
+    controller: 'RegisterCtrl'
+  })
+
   .state('home', {
     url: "/home",
     abstract: true,
@@ -176,7 +188,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   })
 
   .state('business-home', {
-    url: "/:business/",
+    url: "/:business",
     templateUrl: "templates/business/business-home.html",
     controller: "BusinessCtrl"
   })
@@ -185,6 +197,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     url: "/:business/shopping-cart",
     templateUrl: "templates/business/business-shopping.html",
     controller: "BusinessCtrl"
+  })
+
+  .state('business-thanksSale', {
+    url: '/:business/sale/thanks',
+    templateUrl: 'templates/sale/gracias.html',
+    controller: 'BusinessCtrl'
   })
 
   .state('business-client-register', {
@@ -208,20 +226,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'ProfileGetCtrl'
       }
     }
-  })
-
-
-
-  .state('login', {
-    url: "/login",
-    templateUrl: "templates/account/login.html",
-    controller: 'LoginCtrl'
-  })
-
-  .state('register', {
-    url: "/register",
-    templateUrl: "templates/account/register.html",
-    controller: 'RegisterCtrl'
   })
 
   $urlRouterProvider.otherwise('/login');

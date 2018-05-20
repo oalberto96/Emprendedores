@@ -3,15 +3,22 @@
   var app = angular.module('emprendedores');
 
   app.controller('BusinessCtrl', BusinessCtrl);
-  BusinessCtrl.$inject = ['$scope','$state', '$stateParams'];
+  BusinessCtrl.$inject = ['$scope','$state', '$stateParams', '$ionicHistory'];
 
-  function BusinessCtrl($scope, $state, $stateParams) {
+  function BusinessCtrl($scope, $state, $stateParams, $ionicHistory) {
     $scope.go = function (path) {
       $state.go(path);
     }
 
     $scope.goInsideBusiness = function(path){
       $state.go(path, {'business': $stateParams.business});
+    }
+
+    $scope.dirigir = function(){
+      $ionicHistory.nextViewOptions({
+        historyRoot: true
+      });
+      $scope.goInsideBusiness('business-home');
     }
   }
 
@@ -22,15 +29,15 @@
     var ctrl = this;
     ctrl.register = function () {
       BusinessService.register(ctrl.data)
-        .then(function (result) {
+      .then(function (result) {
           //status Ok
           if (result.status == 200) {
             $state.go('home.client');
           }
         })
-        .catch(function (error) {
-          $state.go('login');
-        })
+      .catch(function (error) {
+        $state.go('login');
+      })
     }
   }
 
@@ -42,16 +49,15 @@
     ctrl.business = [];
     ctrl.business_url = $stateParams.business;
     BusinessService.getInfo($stateParams.business)
-      .then(function (result) {
-        ctrl.business.name = result.data.name;
-        ctrl.business.description = result.data.description;
-        console.log(result);
-      });
+    .then(function (result) {
+      ctrl.business.name = result.data.name;
+      ctrl.business.description = result.data.description;
+    });
 
     ProductService.retrieveBusinessProducts($stateParams.business)
-      .then(function (result) {
-        ctrl.products = ProductService.getProducts();
-      });
+    .then(function (result) {
+      ctrl.products = ProductService.getProducts();
+    });
 
     this.itemOnLongPress = function (indexProduct) {
       window.navigator.vibrate(40);
@@ -70,12 +76,12 @@
           subTitle: 'Ingrese cantidad de productos que desea agregar',
           scope: $scope,
           buttons: [
-            {text: 'Cancelar'},
-            {
-              text: '<b>Aceptar</b>',
-              type: 'button-positive',
-              onTap: function (e) {
-                if (!$scope.data.quantity) {
+          {text: 'Cancelar'},
+          {
+            text: '<b>Aceptar</b>',
+            type: 'button-positive',
+            onTap: function (e) {
+              if (!$scope.data.quantity) {
                   //don't allow the user to close unless he enters wifi password
                   e.preventDefault();
                 } else {
@@ -83,8 +89,8 @@
                 }
               }
             }
-          ]
-        });
+            ]
+          });
         myPopup.then(function (res) {
           if (res) {
             resolve(res);
@@ -100,25 +106,27 @@
   }
 
   app.controller('SCartCheckoutCtrl', SCartCheckoutCtrl);
-  SCartCheckoutCtrl.$inject = ['$scope', '$state', '$stateParams', 'BusinessService', 'ProductService', 'SaleService'];
+  SCartCheckoutCtrl.$inject = ['$scope', '$state', '$stateParams', '$ionicHistory','BusinessService', 'ProductService', 'SaleService'];
 
-  function SCartCheckoutCtrl($scope, $state, $stateParams, BusinessService, ProductService, SaleService) {
+  function SCartCheckoutCtrl($scope, $state, $stateParams, $ionicHistory, BusinessService, ProductService, SaleService) {
     var ctrl = this;
     ctrl.sale = SaleService.getSale();
     ctrl.business = [];
     ctrl.business_url = $stateParams.business;
     ctrl.business.name = ctrl.business_url;
     BusinessService.getInfo($stateParams.business)
-      .then(function (result) {
-        ctrl.business.name = result.data.name;
-      })
+    .then(function (result) {
+      ctrl.business.name = result.data.name;
+    })
 
     ctrl.proceed = function () {
       if (ctrl.sale.products.length > 0) {
         SaleService.proceedSale(ctrl.total(), ctrl.business_url)
         .then(function (result) {
-          $scope.goInsideBusiness('business-home');
-          location.reload();
+          $ionicHistory.nextViewOptions({
+            historyRoot: true
+          });     
+          $scope.goInsideBusiness('business-thanksSale');
         });
       } else {
         ctrl.error = "Agregue productos";
@@ -146,10 +154,10 @@
 
     $scope.register = function () {
       BusinessService.userRegister($scope.data, $stateParams.business)
-        .success(function (data, status, headers, config) {
-          $scope.goInsideBusiness('business-home');
-          location.reload();
-        });
+      .success(function (data, status, headers, config) {
+        $scope.goInsideBusiness('business-home');
+        location.reload();
+      });
     }
   }
 
@@ -161,15 +169,15 @@
 
     $scope.login = function () {
       BusinessService.userLogin($scope.data, $stateParams.business)
-        .success(function (data, status, headers, config) {
-          $scope.goInsideBusiness('business-home');
-          location.reload();
-        })
-        .catch(function(error){
-          if(error.status == 406){
-            $scope.error = "Contrasena o correo no valido"
-          }
-        });
+      .success(function (data, status, headers, config) {
+        $scope.goInsideBusiness('business-home');
+        location.reload();
+      })
+      .catch(function(error){
+        if(error.status == 406){
+          $scope.error = "Contrasena o correo no valido"
+        }
+      });
     }
   }
 
