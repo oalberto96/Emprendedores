@@ -1,15 +1,32 @@
 <ion-view view-title="Ayuda">
-  <ion-content class="padding">
-  	<div class="list list-inset" align = "center">
-      <h3>Ayuda</h3>
-  		<div class = "row">
-  			<div class = "col">
-  				<ion-icon name="help-circle"></ion-icon>
-				    <img src="img/perfil2.png" style="width: 100px; height: 100px;">
-			  </div>
-		  </div>		
-	  </div>
+  <ion-content>
+  <div class="list list-inset" align = "center">
+      <img src="img/soporte-tecnico.png" style="height: 250px;">
+    </div>
+    <div class="list">
+      <a class="item item-icon-left">
+        <i class="icon ion-briefcase"></i>
+          Comienza en Venmin
+      </a>
+      <a class="item item-icon-left">
+        <i class="icon ion-clipboard"></i>
+          Usa Venmin en la app & online
+      </a>      
+      <a class="item item-icon-left">
+        <i class="icon ion-chatbubble-working"></i>
+          Soporte tecnico 24hrs
+      </a>
+      <a class = "item item-icon-left" ng-click="ctrl.checkService()">
+        <i class="icon ion-email"></i>
+          Enviar Correo
+      </a>
+      <a class = "item item-icon-left" ng-click="ctrl.checkService()">
+        <i class="icon ion-ios-telephone"></i>
+          (646) 130-40-69
+      </a>
+
+  </div>
 </ion-content>
 </ion-view>
-
+icon ion-chatbubble-working
 
