@@ -36,7 +36,11 @@ class SaleManager(models.Manager):
 		return queryset
 
 	def get(self, id):
-		sale = Sale.objects.get(id=id)
+		sales = Sale.objects.filter(id=id)
+		if sales:
+			sale = sales.first()
+		else:
+			return None
 		products = []
 		for sale_product in SaleProduct.objects.filter(id_sale = sale.id):
 			product = {}

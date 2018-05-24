@@ -17,20 +17,23 @@ class ClientViewSet(viewsets.ViewSet):
 	def create(self, request):
 		request.data['id_user'] = str(request.user.id) #TODO: Mejorar implementacion
 		serializer = ClientSerializer(data=request.data)
-		serializer.is_valid()
-		serializer.save()
-		return Response(serializer.data, status=status.HTTP_201_CREATED)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
 	def retrieve(self, request, pk=None):
 		group_required = ['ulevel0']
-		queryset = Client.objects.get(id=pk)
-		serializer = ClientSerializer(queryset)
-		return Response(serializer.data, status=status.HTTP_201_CREATED)
+		clients = Client.objects.filter(id=pk)
+		if clients:
+			serializer = ClientSerializer(clients.first())
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(status=status.HTTP_404_NOT_FOUND)
 
 	def update(self, request, pk=None):
-		queryset = Client.objects.get(id=pk)
+		queryset = Client.objects.filter(id=pk)
 		request.data['id_user'] = str(request.user.id)
-		serializer = ClientSerializer(queryset, request.data, many=False)
+		serializer = ClientSerializer(queryset.first(), request.data, many=False)
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
@@ -38,8 +41,11 @@ class ClientViewSet(viewsets.ViewSet):
 		return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
 	def destroy(self, request, pk=None):
-		Client.objects.filter(id=pk).delete()
-		return Response(status=status.HTTP_204_NO_CONTENT)
+		clients = Client.objects.filter(id=pk)
+		if clients:
+			clients.first().delete()
+			return Response(status=status.HTTP_204_NO_CONTENT)
+		return Response(status=status.HTTP_404_NOT_FOUND)
 
 	def list(self, request):
 		queryset = Client.objects.filter(id_user=request.user.id)
@@ -59,19 +65,22 @@ class ProductViewSet(viewsets.ViewSet):
 	def create(self, request):
 		request.data['id_user'] = str(request.user.id) #TODO: Mejorar implementacion
 		serializer = ProductSerializer(data=request.data)
-		serializer.is_valid()
-		serializer.save()
-		return Response(serializer.data, status=status.HTTP_201_CREATED)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(status=status.HTTP_404_NOT_FOUND)
 
 	def retrieve(self, request, pk=None):
-		queryset = Product.objects.get(id=pk)
-		serializer = ProductSerializer(queryset)
-		return Response(serializer.data, status=status.HTTP_201_CREATED)
+		products = Product.objects.filter(id=pk)
+		if products:
+			serializer = ProductSerializer(products.first())
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(status=status.HTTP_404_NOT_FOUND)
 
 	def update(self, request, pk=None):
-		queryset = Product.objects.get(id=pk)
+		queryset = Product.objects.filter(id=pk)
 		request.data['id_user'] = str(request.user.id)
-		serializer = ProductSerializer(queryset, request.data, many=False)
+		serializer = ProductSerializer(queryset.first(), request.data, many=False)
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
@@ -79,8 +88,11 @@ class ProductViewSet(viewsets.ViewSet):
 		return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
 	def destroy(self, request, pk=None):
-		Product.objects.filter(id=pk).delete()
-		return Response(status=status.HTTP_204_NO_CONTENT)
+		products = Product.objects.filter(id=pk)
+		if products:
+			products.first().delete()
+			return Response(status=status.HTTP_204_NO_CONTENT)
+		return Response(status=status.HTTP_404_NOT_FOUND)
 	
 	def list(self, request):
 		queryset = Product.objects.filter(id_user=request.user.id)
@@ -101,9 +113,12 @@ class SaleViewSet(viewsets.ViewSet):
 			return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
 	def retrieve(self, request, pk=None):
-		queryset = Sale.rel_objects.get(id=pk)
-		serializer = SaleSerializer(queryset)
-		return Response(serializer.data, status=status.HTTP_201_CREATED)
+		sale = Sale.rel_objects.get(id=pk)
+		if sale:
+			serializer = SaleSerializer(sale)
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		else:
+			return Response(status=status.HTTP_404_NOT_FOUND)
 
 	def list(self, request):
 		queryset = Sale.rel_objects.with_products(sale_owner=request.user.id).order_by('-date')
