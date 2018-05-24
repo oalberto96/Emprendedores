@@ -32,7 +32,7 @@ class SaleSerializer(serializers.ModelSerializer):
 
 	def create(self, validated_data):
 		sale = Sale()
-		sale.id_user = User.objects.get(id=1)
+		sale.id_user = validated_data.get('id_user')
 		sale.id_client = validated_data.get('id_client')
 		sale.date = validated_data.get('date')
 		sale.discount = validated_data.get('discount')
@@ -49,5 +49,4 @@ class SaleSerializer(serializers.ModelSerializer):
 			sale_product.product = Product.objects.get(id=product['id_product'])
 			sale_product.quantity = product['quantity']
 			sale_product.save()
-
 		return sale

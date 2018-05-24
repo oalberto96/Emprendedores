@@ -104,6 +104,7 @@ class SaleViewSet(viewsets.ViewSet):
 	serializer_class = SaleSerializer
 
 	def create(self, request):
+		print(request.user)
 		request.data['id_user'] = str(request.user.id) #TODO: Mejorar implementacion
 		serializer = SaleSerializer(data=request.data)
 		if serializer.is_valid():
