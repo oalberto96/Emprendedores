@@ -14,7 +14,11 @@ function ReportGetCtrl($scope, $stateParams, $ionicHistory, $state,  ReportServi
 		ReportService.retrieveReport()
 		.success(function(result){
 			ctrl.cant = result.cant;
-			ctrl.total = result.total;
+			if(result.total){
+				ctrl.total = result.total;
+			} else{
+				ctrl.total = "0";
+			}
 		});
 	}
 	this.retrieveReport();
