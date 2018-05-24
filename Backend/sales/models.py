@@ -7,12 +7,12 @@ from django.conf import settings
 class Client(models.Model):
 	id_user = models.ForeignKey(settings.AUTH_USER_MODEL)
 	first_name = models.CharField(max_length=130)
-	last_name = models.CharField(max_length=130)
-	email = models.EmailField()
-	phone_number = models.CharField(max_length=30)
-	address = models.CharField(max_length=320)
-	rfc = models.CharField(max_length=100)
-	notes = models.CharField(max_length=300)
+	last_name = models.CharField(max_length=130, blank=True)
+	email = models.EmailField(blank=True)
+	phone_number = models.CharField(max_length=30, blank=True)
+	address = models.CharField(max_length=320, blank=True)
+	rfc = models.CharField(max_length=100, blank=True)
+	notes = models.CharField(max_length=300, blank=True)
 
 	def __str__(self):
 		return str(self.first_name) + " " + str(self.last_name)
@@ -22,8 +22,8 @@ class Product (models.Model):
 	id_user = models.ForeignKey(settings.AUTH_USER_MODEL)
 	name_product = models.CharField(max_length=130)
 	price = models.FloatField()
-	sku = models.CharField(max_length=30)
-	comment = models.CharField(max_length=130)
+	sku = models.CharField(max_length=30, blank=True)
+	comment = models.CharField(max_length=130, blank=True)
 
 	def __str__(self):
 		return str(self.name_product)
