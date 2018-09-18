@@ -1,6 +1,10 @@
 # Emprendedores
 Proyecto de emprendedores
 
+## Demo
+
+[Demo](https://www.youtube.com/watch?v=UBhWD-oc8Jk)
+
 ## Instalacion
 
 ### Django
@@ -57,3 +61,8 @@ Compilar
 ```
 ionic cordova build android
 ```
+
+## Autores
+
+* Alberto Ochoa
+* Bryan Quiroz
